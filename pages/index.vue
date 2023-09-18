@@ -4,10 +4,10 @@ const { locale } = useI18n()
 </script>
 <template>
   <div class="mx-auto overflow-hidden text-white">
-    <main class="h-screen overflow-y-auto">
-      <Info />
+    <main class="h-screen snap-y snap-mandatory overflow-y-auto">
+      <Info class="snap-center" />
 
-      <Todolist />
+      <Todolist class="snap-center" />
     </main>
 
     <div class="fixed bottom-1 left-1">
