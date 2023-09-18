@@ -3,15 +3,19 @@ const switchLocalePath = useSwitchLocalePath()
 const { locale } = useI18n()
 </script>
 <template>
-  <main class="mx-auto text-white">
-    <Info />
+  <div class="mx-auto overflow-hidden text-white">
+    <main class="h-screen overflow-y-auto">
+      <Info />
+
+      <Todolist />
+    </main>
 
     <div class="fixed bottom-1 left-1">
       <NuxtLink :to="switchLocalePath(locale === 'zh' ? 'en' : 'zh')">
         <i class="ri-translate-2 text-xl" />
       </NuxtLink>
     </div>
-  </main>
+  </div>
 </template>
 <style>
 /* https://cssarrowplease.com/ */
