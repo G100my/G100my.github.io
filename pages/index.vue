@@ -4,17 +4,19 @@ const { locale } = useI18n()
 </script>
 <template>
   <div class="mx-auto overflow-hidden text-white">
-    <main class="h-screen snap-y snap-mandatory overflow-y-auto">
+    <main
+      class="sm:no-scrollbar h-screen snap-y snap-mandatory overflow-y-auto"
+    >
       <Info class="snap-center" />
 
       <Todolist class="snap-center" />
-    </main>
 
-    <div class="fixed bottom-1 left-1">
-      <NuxtLink :to="switchLocalePath(locale === 'zh' ? 'en' : 'zh')">
-        <i class="ri-translate-2 text-xl" />
-      </NuxtLink>
-    </div>
+      <div class="absolute bottom-1 left-1">
+        <NuxtLink :to="switchLocalePath(locale === 'zh' ? 'en' : 'zh')">
+          <i class="ri-translate-2 text-xl" />
+        </NuxtLink>
+      </div>
+    </main>
   </div>
 </template>
 <style>
