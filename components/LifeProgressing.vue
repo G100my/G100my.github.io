@@ -25,28 +25,20 @@ function doStaticDom() {
   const y = now.getFullYear()
   const m = now.getMonth()
   const nowIndex = (y - 1991) * 12 + (m - 0)
-  const containerClasses =
-    `grid h-screen w-full grid-cols-[repeat(${LIFE_CUBE_COLS},1fr)] grid-rows-[repeat(${LIFE_CUBE_ROWS},1fr)] items-center justify-items-center gap-0.5 p-3`.split(
-      ' ',
-    )
-  const itemsClasses =
-    `h-3 w-3 rounded-[1px] border border-neutral-900 sm:h-4 sm:w-4`.split(' ')
 
-  container.classList.add(...containerClasses)
-  container.style.backgroundColor = CONTAINER_BG_COLOR
+  container.classList.add('life_progressing_container')
   container.append(
     ...Array(LIFE_CUBE_COLS * LIFE_CUBE_ROWS)
       .fill(null)
       .map(() => {
         const e = document.createElement('div')
-        e.classList.add(...itemsClasses)
-        e.style.backgroundColor = CUBE_COLOR
+        e.classList.add('life_progressing_item')
         return e
       }),
   )
 
-  const target = container.children.item(nowIndex) as HTMLDivElement
-  target.style.backgroundColor = 'rgba(255, 255, 255, 0.3)'
+  const currentMonth = container.children.item(nowIndex) as HTMLDivElement
+  currentMonth.classList.add('current')
 }
 function doThree() {
   if (!container) {
@@ -132,7 +124,7 @@ function showWarning() {
 
 const isSupport = WebGL.isWebGLAvailable()
 onMounted(() => {
-  container = document.getElementById('date_container')!
+  container = document.getElementById('life_progressing')!
   if (isSupport) {
     doThree()
   } else {
@@ -142,5 +134,33 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div id="date_container" class="h-screen w-full" />
+  <div id="life_progressing" class="h-screen w-full" />
 </template>
+<style>
+#life_progressing {
+  --lightColor: white;
+}
+.life_progressing_container {
+  grid-template-columns: repeat(v-bind(LIFE_CUBE_COLS), 1fr);
+  grid-template-rows: repeat(v-bind('LIFE_CUBE_ROWS'), 1fr);
+  @apply grid h-screen w-full items-center justify-items-center gap-0.5 bg-slate-950 p-3;
+}
+.life_progressing_item {
+  @apply h-3 w-3 rounded-sm  bg-blue-950 sm:h-4 sm:w-4;
+}
+.life_progressing_item.current {
+  @apply bg-white/50;
+  animation: breathing_light 2s infinite alternate;
+}
+
+@keyframes breathing_light {
+  from {
+    box-shadow: 0 0 2px var(--lightColor);
+    transform: scale(1);
+  }
+  to {
+    box-shadow: 0 0 20px var(--lightColor);
+    transform: scale(1.05);
+  }
+}
+</style>
