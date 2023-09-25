@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import {
   BoxGeometry,
-  EdgesGeometry,
-  Group,
-  LineBasicMaterial,
-  LineSegments,
+  Color,
   Mesh,
   MeshBasicMaterial,
   Object3DEventMap,
-  OrthographicCamera,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
-  WebGLUtils,
 } from 'three'
 // @ts-ignore
 import WebGL from 'three/addons/capabilities/WebGL'
@@ -20,6 +15,8 @@ import WebGL from 'three/addons/capabilities/WebGL'
 // 70 * 12 = 28 * 30 = 21 * 40 = 840
 const LIFE_CUBE_COLS = 21
 const LIFE_CUBE_ROWS = 40
+const CONTAINER_BG_COLOR = '#020617' // bg-slate-950
+const CUBE_COLOR = '#172554' // bg-blue-950
 
 let container: HTMLElement
 
@@ -33,17 +30,17 @@ function doStaticDom() {
       ' ',
     )
   const itemsClasses =
-    `h-3 w-3 rounded-[1px] border border-neutral-900 bg-blue-950/40 sm:h-4 sm:w-4`.split(
-      ' ',
-    )
+    `h-3 w-3 rounded-[1px] border border-neutral-900 sm:h-4 sm:w-4`.split(' ')
 
   container.classList.add(...containerClasses)
+  container.style.backgroundColor = CONTAINER_BG_COLOR
   container.append(
     ...Array(LIFE_CUBE_COLS * LIFE_CUBE_ROWS)
       .fill(null)
       .map(() => {
         const e = document.createElement('div')
         e.classList.add(...itemsClasses)
+        e.style.backgroundColor = CUBE_COLOR
         return e
       }),
   )
@@ -57,8 +54,6 @@ function doThree() {
     return
   }
 
-  const CUBE_COLS = 21
-  const CUBE_ROWS = 40
   const CUBE_SIZE = 2
   const FOV = 90
 
@@ -66,16 +61,18 @@ function doThree() {
   const h = container.offsetHeight
   const ASPECT = w / h
   const GAP_COL = 2
-  const totalW = CUBE_COLS * (GAP_COL + CUBE_SIZE) - GAP_COL
-  const GAP_ROW = (totalW / ASPECT - CUBE_SIZE * CUBE_ROWS) / (CUBE_ROWS - 1)
-  const totalH = CUBE_ROWS * (GAP_ROW + CUBE_SIZE) - GAP_ROW
+  const totalW = LIFE_CUBE_COLS * (GAP_COL + CUBE_SIZE) - GAP_COL
+  const GAP_ROW =
+    (totalW / ASPECT - CUBE_SIZE * LIFE_CUBE_ROWS) / (LIFE_CUBE_ROWS - 1)
+  const totalH = LIFE_CUBE_ROWS * (GAP_ROW + CUBE_SIZE) - GAP_ROW
   const Z = (totalH / 2) * 1.05
 
   const scene = new Scene()
+  scene.background = new Color(CONTAINER_BG_COLOR)
   const camera = new PerspectiveCamera(FOV, ASPECT, 1, 1000)
   camera.position.z = Z
-  camera.position.x = ((CUBE_COLS - 1) * (CUBE_SIZE + GAP_COL)) / 2
-  camera.position.y = ((CUBE_ROWS - 1) * (CUBE_SIZE + GAP_ROW)) / 2
+  camera.position.x = ((LIFE_CUBE_COLS - 1) * (CUBE_SIZE + GAP_COL)) / 2
+  camera.position.y = ((LIFE_CUBE_ROWS - 1) * (CUBE_SIZE + GAP_ROW)) / 2
 
   const cubes: Mesh<BoxGeometry, MeshBasicMaterial, Object3DEventMap>[] = []
 
@@ -83,11 +80,11 @@ function doThree() {
   renderer.setSize(w, h)
   container.appendChild(renderer.domElement)
 
-  for (let c = 0; c < CUBE_COLS; c++) {
-    for (let r = 0; r < CUBE_ROWS; r++) {
+  for (let c = 0; c < LIFE_CUBE_COLS; c++) {
+    for (let r = 0; r < LIFE_CUBE_ROWS; r++) {
       const geometry = new BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
       const material = new MeshBasicMaterial({
-        color: '#162555',
+        color: CUBE_COLOR,
       })
       let cube = new Mesh(geometry, material)
 
@@ -145,14 +142,5 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div id="date_container" class="m h-screen w-screen bg-blue-950/40" />
-  <!-- <div
-    id="date_container"
-    class="grid h-screen w-full grid-cols-[repeat(21,1fr)] grid-rows-[repeat(40,1fr)] items-center justify-items-center gap-0.5 p-3"
-  >
-    <div
-      v-for="i in 840"
-      class="h-3 w-3 rounded-[1px] border border-neutral-900 bg-blue-950/40 sm:h-4 sm:w-4"
-    />
-  </div> -->
+  <div id="date_container" class="h-screen w-full" />
 </template>
