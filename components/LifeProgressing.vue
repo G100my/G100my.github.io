@@ -88,13 +88,8 @@ function doThree() {
   for (let c = 0; c < CUBE_COLS; c++) {
     for (let r = 0; r < CUBE_ROWS; r++) {
       const geometry = new BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
-      const isAchorColor =
-        (c === 0 && r === 0) ||
-        (c === CUBE_COLS - 1 && r === 0) ||
-        (c === 0 && r === CUBE_ROWS - 1) ||
-        (c === CUBE_COLS - 1 && r === CUBE_ROWS - 1)
       const material = new MeshBasicMaterial({
-        color: isAchorColor ? 'blue' : '#162555',
+        color: '#162555',
       })
       let cube = new Mesh(geometry, material)
 
