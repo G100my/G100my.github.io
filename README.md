@@ -1,4 +1,4 @@
-# Site Content
+# Road map
 
 - 基本資料
 - Contact link
@@ -12,12 +12,15 @@
   - 大港女神: https://www.yourharbourlover.baby/
 - 工商商家列表？
 - 找事做骰子 (except fitler feature)
-- 100 件還想做的事情
-  - 用 Google sheet 做 100-Todolist 後台
-  - Google app script 偵測 Google sheet 變動(onEdit), Debounce, 轉成 base 64 data
-  - Google app script 用 Github api 修改 `100todo.json` content
-  - 觸發 Github action 重新部署
+- [x] 100 件還想做的事情
+  - Using Google Sheet as a CMS for 100-Todolist.
+  - Using Google App Script to monitor Google Sheet (onEdit), applying debounce to minimize deployments, and converting cell content to base 64.
+  - Using GitHub APIs to update 100todo.json.
+  - Trigger GitHub Action for redeployment.
 - 生命格狀計時
+  - [x] water wave animation
+  - [ ] On touch/mouse hover, trigger the ripple effect on the cube.
+  - [ ] Current month cube breathing light animation.
 
 ## 目的：
 
