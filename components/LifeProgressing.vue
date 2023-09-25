@@ -4,6 +4,7 @@ import {
   Color,
   Mesh,
   MeshBasicMaterial,
+  MeshStandardMaterial,
   Object3DEventMap,
   PerspectiveCamera,
   Scene,
@@ -11,6 +12,11 @@ import {
 } from 'three'
 // @ts-ignore
 import WebGL from 'three/addons/capabilities/WebGL'
+
+const now = new Date()
+const y = now.getFullYear()
+const m = now.getMonth()
+const nowIndex = (y - 1991) * 12 + (m - 0)
 
 // 70 * 12 = 28 * 30 = 21 * 40 = 840
 const LIFE_CUBE_COLS = 21
@@ -21,11 +27,6 @@ const CUBE_COLOR = '#172554' // bg-blue-950
 let container: HTMLElement
 
 function doStaticDom() {
-  const now = new Date()
-  const y = now.getFullYear()
-  const m = now.getMonth()
-  const nowIndex = (y - 1991) * 12 + (m - 0)
-
   container.classList.add('life_progressing_container')
   container.append(
     ...Array(LIFE_CUBE_COLS * LIFE_CUBE_ROWS)
@@ -66,19 +67,37 @@ function doThree() {
   camera.position.x = ((LIFE_CUBE_COLS - 1) * (CUBE_SIZE + GAP_COL)) / 2
   camera.position.y = ((LIFE_CUBE_ROWS - 1) * (CUBE_SIZE + GAP_ROW)) / 2
 
-  const cubes: Mesh<BoxGeometry, MeshBasicMaterial, Object3DEventMap>[] = []
+  const cubes: Mesh<
+    BoxGeometry,
+    MeshBasicMaterial | MeshStandardMaterial,
+    Object3DEventMap
+  >[] = []
+  let intensity = 0.05
 
   const renderer = new WebGLRenderer()
   renderer.setSize(w, h)
   container.appendChild(renderer.domElement)
 
+  let currentCube: Mesh<BoxGeometry, MeshStandardMaterial, Object3DEventMap>
+
   for (let c = 0; c < LIFE_CUBE_COLS; c++) {
     for (let r = 0; r < LIFE_CUBE_ROWS; r++) {
       const geometry = new BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
-      const material = new MeshBasicMaterial({
-        color: CUBE_COLOR,
-      })
+      const isCurrent = c * LIFE_CUBE_ROWS + r + 1 === nowIndex
+      const material = isCurrent
+        ? new MeshStandardMaterial({
+            color: CUBE_COLOR,
+            emissive: 'white',
+            emissiveIntensity: intensity,
+          })
+        : new MeshBasicMaterial({ color: CUBE_COLOR })
       let cube = new Mesh(geometry, material)
+      if (isCurrent)
+        currentCube = cube as Mesh<
+          BoxGeometry,
+          MeshStandardMaterial,
+          Object3DEventMap
+        >
 
       cube.position.x = c * (CUBE_SIZE + GAP_COL)
       cube.position.y = r * (CUBE_SIZE + GAP_ROW)
@@ -89,10 +108,15 @@ function doThree() {
     }
   }
 
+  const breatheSpeed = 0.002
+  const breatheMax = 0.8
+  const breatheMin = 0.05
+  let breatheDirection = 1
+
   function animate() {
     const time = Date.now() * 0.001
     const frequencyOffset = 0.08
-    const amplitudeOffset = 1.2
+    const amplitudeOffset = 0.8
 
     for (let cube of cubes) {
       const distanceFromTopLeft = Math.sqrt(
@@ -103,6 +127,13 @@ function doThree() {
         Math.sin(distanceFromTopLeft * frequencyOffset + time) * amplitudeOffset
       cube.rotation.x += 0.01
       cube.rotation.y += 0.01
+    }
+    if (currentCube) {
+      if (intensity > breatheMax || intensity < breatheMin) {
+        breatheDirection = -breatheDirection
+      }
+      intensity += breatheSpeed * breatheDirection
+      currentCube.material.emissiveIntensity = intensity
     }
 
     renderer.render(scene, camera)
