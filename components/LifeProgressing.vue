@@ -77,13 +77,11 @@ function doThree() {
   camera.position.x = ((CUBE_COLS - 1) * (CUBE_SIZE + GAP_COL)) / 2
   camera.position.y = ((CUBE_ROWS - 1) * (CUBE_SIZE + GAP_ROW)) / 2
 
-  const cubes: Group<Object3DEventMap>[] = []
+  const cubes: Mesh<BoxGeometry, MeshBasicMaterial, Object3DEventMap>[] = []
 
   const renderer = new WebGLRenderer()
   renderer.setSize(w, h)
   container.appendChild(renderer.domElement)
-
-  // const lineMaterial = new LineBasicMaterial({ color: 'gray' })
 
   for (let c = 0; c < CUBE_COLS; c++) {
     for (let r = 0; r < CUBE_ROWS; r++) {
@@ -93,19 +91,12 @@ function doThree() {
       })
       let cube = new Mesh(geometry, material)
 
-      let edges = new EdgesGeometry(geometry)
-      // let line = new LineSegments(edges, lineMaterial)
+      cube.position.x = c * (CUBE_SIZE + GAP_COL)
+      cube.position.y = r * (CUBE_SIZE + GAP_ROW)
+      cube.position.z = -CUBE_SIZE / 2
 
-      let group = new Group()
-      group.add(cube)
-      // group.add(line)
-
-      group.position.x = c * (CUBE_SIZE + GAP_COL)
-      group.position.y = r * (CUBE_SIZE + GAP_ROW)
-      group.position.z = -CUBE_SIZE / 2
-
-      scene.add(group)
-      cubes.push(group)
+      scene.add(cube)
+      cubes.push(cube)
     }
   }
 
