@@ -115,12 +115,23 @@ function doThree() {
   }
 
   function animate() {
+    const time = Date.now() * 0.001
+    const frequencyOffset = 0.08
+    const amplitudeOffset = 1.2
+
+    for (let cube of cubes) {
+      const distanceFromTopLeft = Math.sqrt(
+        cube.position.x ** 2 + cube.position.y ** 2,
+      )
+
+      cube.position.z =
+        Math.sin(distanceFromTopLeft * frequencyOffset + time) * amplitudeOffset
+      cube.rotation.x += 0.01
+      cube.rotation.y += 0.01
+    }
+
     renderer.render(scene, camera)
     requestAnimationFrame(animate)
-    // for (let cube of cubes) {
-    //   cube.rotation.x += 0.01
-    //   cube.rotation.y += 0.01
-    // }
   }
 
   animate()
