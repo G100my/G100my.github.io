@@ -65,7 +65,7 @@ function doThree() {
   const camera = new PerspectiveCamera(FOV, ASPECT, 1, 1000)
   camera.position.z = Z
   camera.position.x = ((LIFE_CUBE_COLS - 1) * (CUBE_SIZE + GAP_COL)) / 2
-  camera.position.y = ((LIFE_CUBE_ROWS - 1) * (CUBE_SIZE + GAP_ROW)) / 2
+  camera.position.y = -((LIFE_CUBE_ROWS - 1) * (CUBE_SIZE + GAP_ROW)) / 2
 
   const cubes: Mesh<
     BoxGeometry,
@@ -83,7 +83,7 @@ function doThree() {
   for (let c = 0; c < LIFE_CUBE_COLS; c++) {
     for (let r = 0; r < LIFE_CUBE_ROWS; r++) {
       const geometry = new BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
-      const isCurrent = c * LIFE_CUBE_ROWS + r + 1 === nowIndex
+      const isCurrent = r * LIFE_CUBE_COLS + c === nowIndex
       const material = isCurrent
         ? new MeshStandardMaterial({
             color: CUBE_COLOR,
@@ -100,7 +100,7 @@ function doThree() {
         >
 
       cube.position.x = c * (CUBE_SIZE + GAP_COL)
-      cube.position.y = r * (CUBE_SIZE + GAP_ROW)
+      cube.position.y = -r * (CUBE_SIZE + GAP_ROW)
       cube.position.z = -CUBE_SIZE / 2
 
       scene.add(cube)
