@@ -1,16 +1,23 @@
 # Road map
 
 - 基本資料
-- Contact link
-  - ig: https://www.instagram.com/lo_ol.g100/
-  - github: https://github.com/G100my
-  - ~~cakeResume: https://www.cakeresume.com/me/g100my~~
-  - linkin: https://www.linkedin.com/in/g100lo/
+  - Contact link
+    - ig: https://www.instagram.com/lo_ol.g100/
+    - github: https://github.com/G100my
+    - ~~cakeResume: https://www.cakeresume.com/me/g100my~~
+    - linkin: https://www.linkedin.com/in/g100lo/
+  - [ ] how can i help? (技能？解釋自己的工作內容？擅長的？)
+  - [ ] 樣式
+    - [ ] 從特效文字訊息輸出？
+    - [ ] 模仿編輯器樣式的文字訊息輸出？
+    - [ ] 模擬懸空的真實名片？
 - Spotify 正在播
 - 還是放個作品集好了...
   - space-radio: https://space-radio.app/#/
   - 大港女神: https://www.yourharbourlover.baby/
 - 工商商家列表？
+  - [ ] Akijo+地圖
+  -
 - 找事做骰子 (except fitler feature)
 - [x] 100 件還想做的事情
   - Using Google Sheet as a CMS for 100-Todolist.
@@ -19,8 +26,8 @@
   - Trigger GitHub Action for redeployment.
 - 生命格狀計時
   - [x] water wave animation
-  - [ ] On touch/mouse hover, trigger the ripple effect on the cube.
-  - [ ] Current month cube breathing light animation.
+  - [ ] ~~On touch/mouse hover, trigger the ripple effect on the cube.~~
+  - [x] Current month cube breathing light animation.
 
 ## 目的：
 

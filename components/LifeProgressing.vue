@@ -115,8 +115,8 @@ function doThree() {
 
   function animate() {
     const time = Date.now() * 0.001
-    const frequencyOffset = 0.08
-    const amplitudeOffset = 0.8
+    const frequencyOffset = 0.1
+    const amplitudeOffset = 1
 
     for (let cube of cubes) {
       const distanceFromTopLeft = Math.sqrt(
@@ -125,8 +125,8 @@ function doThree() {
 
       cube.position.z =
         Math.sin(distanceFromTopLeft * frequencyOffset + time) * amplitudeOffset
-      cube.rotation.x += 0.01
-      cube.rotation.y += 0.01
+      // cube.rotation.x += 0.01
+      // cube.rotation.y += 0.01
     }
     if (currentCube) {
       if (intensity > breatheMax || intensity < breatheMin) {
