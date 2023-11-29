@@ -37,3 +37,10 @@
 以上低標: 192000
 
 ---
+
+- 社區型？ 或許高級大樓社區需要這樣的空間？
+- 取代掉 led 燈光、日光燈等不舒服的燈光
+  - [導光板](https://www.itri.org.tw/ListStyle.aspx?DisplayStyle=18_content&SiteID=1&MmmID=1036452026061075714&MGID=620645440311412442)
+  - [集光器系統](https://www.jodesign.org.tw/index.php/JODesign/article/viewFile/803/465)
+  - [導光膜](https://www.3m.com.tw/3M/zh_TW/building-window-solutions-tw/solutions/redirect-daylight/)
+  - [other](https://www.itri.org.tw/ListStyle.aspx?DisplayStyle=18_content&SiteID=1&MmmID=1036452026061075714&MGID=620651720711567775)
