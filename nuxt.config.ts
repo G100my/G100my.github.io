@@ -1,3 +1,4 @@
+import Markdown from 'unplugin-vue-markdown/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -28,5 +29,18 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'github-pages',
+  },
+  components: [
+    { path: '~/contents', extensions: ['.md'], prefix: 'Markdown' },
+    '~/components',
+  ],
+  vite: {
+    vue: { include: [/\.vue$/, /\.md$/] },
+    plugins: [
+      Markdown({
+        wrapperClasses: 'markdown-',
+        exclude: '_*.md',
+      }),
+    ],
   },
 })

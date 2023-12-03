@@ -19,7 +19,8 @@
     "prettier-plugin-tailwindcss": "^0.5.3"
   },
   "dependencies": {
-    "three": "^0.155.0"
+    "three": "^0.155.0",
+    "unplugin-vue-markdown": "^0.25.2"
   },
   "prettier": {
     "plugins": [
