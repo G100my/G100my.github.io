@@ -4,7 +4,7 @@ const { locale } = useI18n()
 const displayEmail = 'g100@lubn.com'
 const myName = computed(() => {
   if (locale.value === 'zh') return ['羅', 'Lo']
-  else return [t('me'), '羅']
+  else return [t('me.name'), '羅']
 })
 
 const showTip = ref(false)
