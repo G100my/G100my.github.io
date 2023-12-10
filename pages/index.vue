@@ -5,11 +5,26 @@ const { locale } = useI18n()
 <template>
   <div class="mx-auto overflow-hidden text-white">
     <main
-      class="sm:no-scrollbar h-screen snap-y snap-mandatory overflow-y-auto"
+      class="_container h-screen snap-y snap-mandatory overflow-y-auto sm:no-scrollbar"
     >
-      <Info class="snap-center" />
+      <!-- <CoverBlock /> -->
 
-      <Todolist class="snap-center" />
+      <section>
+        <MarkdownAboutZh />
+      </section>
+
+      <TechBlock />
+
+      <section>
+        <MarkdownHowCanIHelpZh />
+      </section>
+
+      <!-- spotify block -->
+      <!-- side projects -->
+      <!-- what next -->
+      <TodolistBlock />
+
+      <LifeProgressing />
 
       <div class="absolute bottom-1 left-1">
         <NuxtLink :to="switchLocalePath(locale === 'zh' ? 'en' : 'zh')">
@@ -20,6 +35,10 @@ const { locale } = useI18n()
   </div>
 </template>
 <style>
+._container > section {
+  @apply min-h-screen snap-center pb-10;
+}
+
 /* https://cssarrowplease.com/ */
 .arrow_box {
   @apply absolute right-full -translate-x-3 p-1 text-xs;

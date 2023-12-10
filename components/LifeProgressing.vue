@@ -165,7 +165,9 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div id="life_progressing" class="h-screen w-full" />
+  <section>
+    <div id="life_progressing" class="h-full w-full" />
+  </section>
 </template>
 <style>
 #life_progressing {

@@ -1,4 +1,6 @@
 import Markdown from 'unplugin-vue-markdown/vite'
+
+const isProd = process.env.NODE_ENV === 'production' ? true : undefined
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -25,6 +27,17 @@ export default defineNuxtConfig({
           href: 'https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css',
         },
       ],
+      script: [
+        // justfont
+        isProd
+          ? {
+              type: 'text/javascript',
+              src: './justfont.js',
+            }
+          : {
+              src: '//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-65073.js',
+            },
+      ],
     },
   },
   nitro: {
@@ -38,7 +51,7 @@ export default defineNuxtConfig({
     vue: { include: [/\.vue$/, /\.md$/] },
     plugins: [
       Markdown({
-        wrapperClasses: 'markdown-',
+        wrapperClasses: 'markdown',
         exclude: '_*.md',
       }),
     ],
