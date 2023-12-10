@@ -9,7 +9,7 @@ const { locale } = useI18n()
     >
       <!-- <CoverBlock /> -->
 
-      <section>
+      <section class="flex items-center">
         <MarkdownAboutZh />
       </section>
 

@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin'
 
 export default {
-  content: ['./**/*.{vue,ts}'],
+  content: ['./**/*.{vue,ts,md}'],
   plugins: [
     plugin(function ({ addUtilities }) {
       addUtilities({
