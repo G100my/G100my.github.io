@@ -13,13 +13,13 @@
     "@nuxtjs/i18n": "^8.0.0-rc.3",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18.17.3",
-    "@types/three": "^0.156.0",
+    "@types/three": "^0.159.0",
     "nuxt": "^3.6.5",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3"
   },
   "dependencies": {
-    "three": "^0.155.0",
+    "three": "^0.159.0",
     "unplugin-vue-markdown": "^0.25.2"
   },
   "prettier": {
