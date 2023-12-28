@@ -11,22 +11,31 @@ import {
   WebGLRenderer,
 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { MY_INFO } from '~/constants'
 
 async function init() {
   const canvas = document.getElementById('canvas')!
   const scene = new Scene()
+  const w = canvas.clientWidth
+  const h = canvas.clientHeight
+  // scene.background = new Color(Color.NAMES.grey) // testing bg
   const renderer = new WebGLRenderer({ antialias: true, canvas, alpha: true })
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setSize(w, h)
   const gltfLoader = new GLTFLoader()
+
   {
+    // camera
     const fov = 75
-    const aspect = window.innerWidth / window.innerHeight
-    const near = 0.1
-    const far = 1000
+    const aspect = 1
+    const near = 17
+    const far = 30
     var camera = new PerspectiveCamera(fov, aspect, near, far)
-    camera.position.set(0, 0, 50)
+    camera.position.set(0, 0, 22)
+    camera.aspect = w / h
+    camera.updateProjectionMatrix()
   }
   {
+    // light
     const skyColor = Color.NAMES.whitesmoke
     const groundColor = Color.NAMES.darkblue
     const intensity = 5
@@ -35,6 +44,7 @@ async function init() {
   }
   let directionalLight: DirectionalLight
   {
+    // directional Light
     const color = Color.NAMES.lightskyblue
     const intensity = 0.8
     directionalLight = new DirectionalLight(color, intensity)
@@ -57,10 +67,19 @@ async function init() {
 
   let angle = 0
   const radius = 5
+  function resizeRendererToDisplaySize(renderer: WebGLRenderer) {
+    const canvas = renderer.domElement
+    const needResize = canvas.width !== w || canvas.height !== h
+    if (needResize) {
+      renderer.setSize(w, h, false)
+      camera.aspect = w / h
+      camera.updateProjectionMatrix()
+    }
+  }
   function render(time: number) {
-    time *= 0.001
-    card.rotation.y = Math.sin(time) * 0.05
-    card.rotation.x = Math.sin(time) * 0.05
+    time *= 0.0001
+    card.rotation.y = radius * Math.cos(angle) * 0.008
+    card.rotation.x = radius * Math.sin(angle) * 0.008
 
     directionalLight.position.x = radius * Math.cos(angle)
     directionalLight.position.y = radius * Math.sin(angle)
@@ -69,17 +88,41 @@ async function init() {
 
     renderer.render(scene, camera)
     requestAnimationFrame(render)
+    resizeRendererToDisplaySize(renderer)
   }
 }
 onMounted(() => {
   init()
 })
+
+const { t } = useI18n()
+const top = [
+  t('me.title', '', { locale: 'en' }),
+  t('me.company_of_employment', '', { locale: 'en' }),
+  t(
+    'about.based_in',
+    { location: t('me.location', '', { locale: 'en' }) },
+    { locale: 'en' },
+  ),
+]
 </script>
 <template>
-  <section>
-    <div class="fixed h-screen w-screen">
-      <canvas id="canvas" class="bg-transparent" />
-    </div>
-    <h2 class="-mx-10 bg-blue-900/50 px-10 py-4 text-5xl">WEB DEVELOPER</h2>
-  </section>
+  <div class="h-full space-y-10">
+    <h1
+      class="relative -z-10 -mx-10 space-y-3 bg-seagull-900 py-4 text-center text-5xl"
+    >
+      <p>Web Developer</p>
+      <p>[ {{ MY_INFO.name }} ]</p>
+    </h1>
+    <canvas id="canvas" class="bg-transparent aspect-square w-[310px]" />
+    <section class="p-6">
+      <ul class="space-y-1 text-base">
+        <li v-for="i in top" class="flex">
+          <IconWrapped name="loader-5-line" class="rotate-180" />
+          <span class="whitespace-nowrap">{{ i }}</span>
+        </li>
+      </ul>
+      <ContactBlock class="mt-4" />
+    </section>
+  </div>
 </template>

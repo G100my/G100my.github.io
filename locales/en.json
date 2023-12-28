@@ -1,9 +1,12 @@
 {
-  "me.name": "Lo",
-  "me.title": "Front-end Developer",
+  "100.title": "100 things still want to do",
+  "about.based_in": "Based in {location}",
+  "about.employed_at": "Employed at {company}",
   "me.company_of_employment": "Lubn",
   "me.contact_info": "Contact",
   "me.contact": "Contact Information",
+  "me.location": "Kaohsiung, Taiwan",
+  "me.name": "Lo",
   "me.skills": "Front-end Web Development / Static Website Setup",
-  "100.title": "100 things still want to do"
+  "me.title": "Front-end Web Developer"
 }

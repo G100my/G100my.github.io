@@ -6,19 +6,22 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
   i18n: {
-    // Link localizing settings
-    locales: ['en', 'zh'],
+    debug: true,
+    locales: [
+      { code: 'zh', file: './locales/zh.json', name: 'zh' },
+      { code: 'en', file: './locales/en.json', name: 'en' },
+    ],
     defaultLocale: 'zh',
-
+    types: 'composition',
     bundle: {
+      fullInstall: false,
       compositionOnly: true,
-      // 還沒有這個功能
-      // fullInstall: false,
     },
   },
   devServer: {
     port: 2309,
   },
+  ssr: true,
   app: {
     head: {
       link: [

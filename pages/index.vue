@@ -3,11 +3,11 @@ const switchLocalePath = useSwitchLocalePath()
 const { locale } = useI18n()
 </script>
 <template>
-  <div class="mx-auto overflow-hidden text-white">
+  <div class="_container text-white mx-auto overflow-hidden">
     <main
-      class="_container h-screen snap-y snap-mandatory overflow-y-auto sm:no-scrollbar"
+      class="h-screen snap-y snap-mandatory space-y-10 overflow-y-auto p-10 sm:no-scrollbar"
     >
-      <!-- <CoverBlock /> -->
+      <CoverBlock />
 
       <section class="flex items-center">
         <MarkdownAboutZh />
@@ -22,21 +22,34 @@ const { locale } = useI18n()
       <!-- spotify block -->
       <!-- side projects -->
       <!-- what next -->
-      <TodolistBlock />
+      <!-- <TodolistBlock /> -->
 
-      <LifeProgressing />
+      <!-- <LifeProgressing class="h-screen" /> -->
 
       <div class="absolute bottom-1 left-1">
         <NuxtLink :to="switchLocalePath(locale === 'zh' ? 'en' : 'zh')">
-          <i class="ri-translate-2 text-xl" />
+          <IconWrapped name="translate-2" class="text-xl" />
         </NuxtLink>
       </div>
     </main>
   </div>
 </template>
 <style>
-._container > section {
-  @apply min-h-screen snap-center pb-10;
+._container {
+  background-image: url('~/assets/bg.png');
+  background-position-y: center;
+  background-position-x: 46.4%;
+}
+section {
+  /* @apply rounded-lg bg-seagull-50/80 outline outline-2 outline-offset-4 outline-seagull-200 backdrop:blur-lg; */
+  @apply rounded-lg bg-seagull-900/50 outline outline-2 outline-seagull-200 backdrop-blur-xl;
+}
+main > div,
+main > section {
+  @apply max-h-full snap-center;
+}
+main > section {
+  @apply overflow-auto no-scrollbar;
 }
 
 /* https://cssarrowplease.com/ */

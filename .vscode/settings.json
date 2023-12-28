@@ -1,6 +1,7 @@
 {
   "i18n-ally.localesPaths": ["locales"],
   "i18n-ally.keystyle": "flat",
+  "i18n-ally.keepFulfilled": true,
   "i18n-ally.autoDetection": false,
   "i18n-ally.dirStructure": "auto",
   "css.customData": [".vscode/tailwind.json"]
