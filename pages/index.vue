@@ -3,9 +3,9 @@ const switchLocalePath = useSwitchLocalePath()
 const { locale } = useI18n()
 </script>
 <template>
-  <div class="_container text-white mx-auto overflow-hidden">
+  <div class="bg-slate-950 relative mx-auto h-screen max-w-lg">
     <main
-      class="h-screen snap-y snap-mandatory space-y-10 overflow-y-auto p-10 sm:no-scrollbar"
+      class="_container text-white relative z-10 mx-auto h-screen min-h-screen snap-y snap-mandatory space-y-10 overflow-hidden overflow-y-auto p-10 sm:no-scrollbar"
     >
       <CoverBlock />
 

@@ -1,7 +1,5 @@
 <template>
-  <div class="relative mx-auto h-screen max-w-lg bg-slate-950">
-    <NuxtPage class="relative z-10 min-h-screen" />
-  </div>
+  <NuxtPage />
 </template>
 <style>
 /* font */
