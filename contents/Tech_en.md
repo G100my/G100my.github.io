@@ -1,4 +1,6 @@
-### Skill & experience
+---
+title: Skill & experience
+---
 
 My current job skills primarily focus on the frontend web development.
 I often use a combination of Vue, TypeScript, and Tailwind CSS to implement projects for both personal and work-related purposes.

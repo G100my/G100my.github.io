@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
   i18n: {
-    debug: true,
     locales: [
       { code: 'zh', file: './locales/zh.json', name: 'zh' },
       { code: 'en', file: './locales/en.json', name: 'en' },

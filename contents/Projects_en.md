@@ -1,3 +1,7 @@
+---
+title: Side projects
+---
+
 ## Space Radio (Jukebox)
 
 As development was nearing completion, Spotify introduced a similar feature that allowed collaborative playlist editing, so I discontinued further development/maintenance.

@@ -1,5 +1,7 @@
 <template>
-  <NuxtLayout />
+  <NuxtLayout name="app-style">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 <style>
 /* font */

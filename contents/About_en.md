@@ -1,4 +1,6 @@
-## Hi, I'm Luo
+---
+title: Hi, I'm Luo
+---
 
 A Taiwanese, currently living in Kaohsiung, and you can often find me in the unassuming corners of coffee shops.
 

@@ -1,3 +1,7 @@
+---
+title: Side project
+---
+
 ## Space radio(Jukebox)
 
 在開發接近尾聲時，Spotify 就推出了類似的、可以共同編輯播放清單的功能，故已不再繼續開發/維護。

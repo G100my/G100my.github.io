@@ -11,7 +11,6 @@ import {
   WebGLRenderer,
 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { MY_INFO } from '~/constants'
 
 async function init() {
   const canvas = document.getElementById('canvas')!
@@ -94,35 +93,7 @@ async function init() {
 onMounted(() => {
   init()
 })
-
-const { t } = useI18n()
-const top = [
-  t('me.title', '', { locale: 'en' }),
-  t('me.company_of_employment', '', { locale: 'en' }),
-  t(
-    'about.based_in',
-    { location: t('me.location', '', { locale: 'en' }) },
-    { locale: 'en' },
-  ),
-]
 </script>
 <template>
-  <div class="h-full space-y-10">
-    <h1
-      class="relative -z-10 -mx-10 space-y-3 bg-seagull-900 py-4 text-center text-5xl"
-    >
-      <p>Web Developer</p>
-      <p>[ {{ MY_INFO.name }} ]</p>
-    </h1>
-    <canvas id="canvas" class="bg-transparent aspect-square w-[310px]" />
-    <section class="p-6">
-      <ul class="space-y-1 text-base">
-        <li v-for="i in top" class="flex">
-          <IconWrapped name="loader-5-line" class="rotate-180" />
-          <span class="whitespace-nowrap">{{ i }}</span>
-        </li>
-      </ul>
-      <ContactBlock class="mt-4" />
-    </section>
-  </div>
+  <canvas id="canvas" class="bg-transparent aspect-square w-[310px]" />
 </template>
