@@ -1,4 +1,5 @@
 <template>
+  <!-- <NuxtLayout> -->
   <NuxtLayout name="app-style">
     <NuxtPage />
   </NuxtLayout>
@@ -37,11 +38,8 @@ body {
 }
 
 /* markdown */
-.markdown {
-  @apply px-10;
-}
 .markdown > p {
-  @apply my-4;
+  @apply my-4 first:mt-0 last:mb-0;
 }
 .markdown > ul {
   @apply list-disc pl-5;

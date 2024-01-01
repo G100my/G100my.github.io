@@ -55,6 +55,7 @@ export default defineNuxtConfig({
       Markdown({
         wrapperClasses: 'markdown',
         exclude: '_*.md',
+        wrapperComponent: 'article',
       }),
     ],
   },
