@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { MY_INFO } from '~/constants'
 
-const switchLocalePath = useSwitchLocalePath()
-const { locale } = useI18n()
-
 const { t } = useI18n()
 const top = [
   t('me.title', '', { locale: 'en' }),
@@ -16,9 +13,9 @@ const top = [
 ]
 </script>
 <template>
-  <div class="bg-slate-950 relative mx-auto h-screen max-w-lg">
+  <div class="relative mx-auto h-screen max-w-lg bg-slate-950">
     <main
-      class="_container text-white relative z-10 mx-auto h-screen min-h-screen snap-y snap-mandatory space-y-10 overflow-hidden overflow-y-auto p-10 sm:no-scrollbar"
+      class="_container relative z-10 mx-auto h-screen min-h-screen snap-y snap-mandatory space-y-10 overflow-hidden overflow-y-auto p-10 text-white sm:no-scrollbar"
     >
       <div class="h-full space-y-10">
         <h1
@@ -55,12 +52,6 @@ const top = [
       <!-- <TodolistBlock /> -->
 
       <!-- <LifeProgressing class="h-screen" /> -->
-
-      <div class="absolute bottom-1 left-1">
-        <NuxtLink :to="switchLocalePath(locale === 'zh' ? 'en' : 'zh')">
-          <IconWrapped name="translate-2" class="text-xl" />
-        </NuxtLink>
-      </div>
     </main>
   </div>
 </template>

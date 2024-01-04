@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { MY_INFO } from '~/constants'
 import MDAboutEn from '~/contents/About_en.md'
-console.log('🚀 ~ file: appStyle.vue:4 ~ MDAboutEn:', MDAboutEn)
 import MDAboutZh from '~/contents/About_zh.md'
 import MDHowCanIHelpZh from '~/contents/HowCanIHelp_zh.md'
 import MDProjectEn from '~/contents/Projects_en.md'
@@ -18,11 +17,13 @@ const WrappedMDProjects = useDetailsWrapper({
 const WrappedMDTech = useDetailsWrapper({ en: MDTechEn, zh: MDTechZh })
 </script>
 <template>
-  <img src="~/assets/bg.png" class="h-dvh fixed w-screen object-cover" />
+  <img src="~/assets/bg.png" class="fixed h-screen w-screen object-cover" />
+  <div
+    class="fixed inset-0 h-screen w-full bg-gradient-to-b from-lochmara-50/90 from-30% to-lochmara-950/80"
+  />
   <main
     :class="[
       'h-dvh relative w-screen space-y-5 overflow-auto px-10',
-      'bg-gradient-to-b from-lochmara-50/90 from-30% to-lochmara-950/80',
       'lg:flex lg:flex-col',
       // 'bg-[url(~/assets/bg.png)]',
     ]"

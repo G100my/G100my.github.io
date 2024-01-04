@@ -3,6 +3,8 @@
   <NuxtLayout name="app-style">
     <NuxtPage />
   </NuxtLayout>
+
+  <LangSwitch />
 </template>
 <style>
 /* font */

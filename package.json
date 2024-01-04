@@ -19,6 +19,9 @@
     "prettier-plugin-tailwindcss": "^0.5.3"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
+    "muuri": "^0.9.5",
+    "pinia": "^2.1.7",
     "three": "^0.159.0",
     "unplugin-vue-markdown": "^0.25.2"
   },

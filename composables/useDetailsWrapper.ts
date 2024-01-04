@@ -28,14 +28,14 @@ export function useDetailsWrapper(article: ArticleLangs) {
   onUnmounted(() => {
     window.removeEventListener('resize', callback)
   })
+  const { locale } = useI18n()
+
+  if (!(locale.value in article)) {
+    return undefined
+  }
+
   return defineComponent({
     setup() {
-      const { locale } = useI18n()
-
-      if (!(locale.value in article)) {
-        return undefined
-      }
-
       const markdown = ref()
       let isShow = ref(false)
       let maxHeight: number
@@ -59,7 +59,7 @@ export function useDetailsWrapper(article: ArticleLangs) {
                 'text-1xl flex w-full rounded-md py-2 pl-1 pr-3',
                 'bg-gradient-to-b from-sundown-50 via-seagull-400 via-80% to-seagull-700',
                 'border-2 border-seagull-900',
-                'lg:border-none lg:bg-gray-50/40 lg:bg-none lg:text-3xl lg:backdrop-blur-lg lg:px-3',
+                'lg:border-none lg:bg-gray-50/40 lg:bg-none lg:text-3xl lg:backdrop-blur-lg lg:px-3 lg:rounded-b-none',
               ],
               onClick,
             },
