@@ -4,7 +4,7 @@ const isProd = process.env.NODE_ENV === 'production' ? true : undefined
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@pinia/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxtjs/device'],
   i18n: {
     locales: [
       { code: 'zh', file: './locales/zh.json', name: 'zh' },
@@ -16,9 +16,6 @@ export default defineNuxtConfig({
       fullInstall: false,
       compositionOnly: true,
     },
-  },
-  pinia: {
-    storesDirs: ['./stores/**'],
   },
   devServer: {
     port: 2309,
