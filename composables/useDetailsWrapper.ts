@@ -6,29 +6,9 @@ interface ArticleLangs {
   zh?: ComponentOptions
 }
 
-let isDeskTop = ref(false)
-const desktopLimit = 1024
-let hasRegister = false
-const callback = () => {
-  if (window.innerWidth >= desktopLimit && !isDeskTop.value) {
-    isDeskTop.value = true
-  } else if (window.innerWidth <= desktopLimit && isDeskTop.value) {
-    isDeskTop.value = false
-  }
-}
-
 export function useDetailsWrapper(article: ArticleLangs) {
-  onMounted(() => {
-    callback()
-    if (!hasRegister) {
-      window.addEventListener('resize', callback)
-      hasRegister = true
-    }
-  })
-  onUnmounted(() => {
-    window.removeEventListener('resize', callback)
-  })
   const { locale } = useI18n()
+  const { isDesktop } = useDevice()
 
   if (!(locale.value in article)) {
     return undefined
@@ -37,7 +17,7 @@ export function useDetailsWrapper(article: ArticleLangs) {
   return defineComponent({
     setup() {
       const markdown = ref()
-      let isShow = ref(false)
+      let isShow = ref(isDesktop)
       let maxHeight: number
       let containerDiv: HTMLDivElement | null = null
 
@@ -64,13 +44,11 @@ export function useDetailsWrapper(article: ArticleLangs) {
               onClick,
             },
             [
-              isDeskTop.value
-                ? undefined
-                : h(IconWrapped, {
-                    name: 'loader-5-line',
-                    class:
-                      'rotate-180 transition-transform group-open:rotate-[0.75turn]',
-                  }),
+              h(IconWrapped, {
+                name: 'loader-5-line',
+                class:
+                  'rotate-180 transition-transform group-open:rotate-[0.75turn]',
+              }),
               markdown.value?.frontmatter.title,
             ],
           ),
@@ -80,9 +58,7 @@ export function useDetailsWrapper(article: ArticleLangs) {
               class:
                 'transition-[max-height] overflow-hidden bg-gray-50/40 backdrop-blur-lg',
               'data-collapse': '',
-              style: `max-height: ${
-                isShow.value || isDeskTop.value ? maxHeight : 0
-              }px;`,
+              style: `max-height: ${isShow.value ? maxHeight : 0}px;`,
             },
             [
               h(
@@ -92,16 +68,14 @@ export function useDetailsWrapper(article: ArticleLangs) {
                   class: 'p-3',
                 },
               ),
-              isDeskTop
-                ? undefined
-                : h(
-                    'button',
-                    {
-                      class: 'h-10 w-full  text-3xl text-lochmara-950',
-                      onClick,
-                    },
-                    [h(IconWrapped, { name: 'arrow-up-double-line' })],
-                  ),
+              h(
+                'button',
+                {
+                  class: 'h-10 w-full  text-3xl text-lochmara-950',
+                  onClick,
+                },
+                [h(IconWrapped, { name: 'arrow-up-double-line' })],
+              ),
             ],
           ),
         ])
