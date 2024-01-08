@@ -2,7 +2,7 @@
 import { MY_INFO } from '~/constants'
 </script>
 <template>
-  <nav class="flex items-center justify-between gap-4 p-1">
+  <nav class="p-1">
     <a :href="'mailto:' + MY_INFO.email">
       <IconWrapped name="mail-line" />
       <span class="sr-only">Email</span>
@@ -26,11 +26,11 @@ import { MY_INFO } from '~/constants'
 </template>
 <style scoped>
 nav > a {
-  @apply outline outline-2 outline-offset-2 outline-alto-200;
-  @apply rounded-full shadow-lg;
+  @apply outline outline-2 outline-offset-2 outline-alto-200 lg:outline-offset-0;
+  @apply flex aspect-square w-10 items-center justify-center rounded-full shadow-lg;
+  @apply bg-gradient-to-b from-sundown-100 from-20% to-seagull-600;
 }
 nav > a > i {
-  @apply bg-gradient-to-b from-sundown-100 from-20% to-seagull-600;
-  @apply block aspect-square rounded-full p-1 text-xl leading-none;
+  @apply flex aspect-square h-10 items-center justify-center rounded-full p-1 text-xl leading-none lg:text-3xl;
 }
 </style>

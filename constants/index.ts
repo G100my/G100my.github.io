@@ -1,6 +1,6 @@
 import { useI18n } from '#imports'
 export const MY_INFO = computed(() => {
-  const { t } = useI18n()
+  const t = useNuxtApp().$i18n.t
   return {
     name: t('me.name'),
     email: 'g100mylan229@gmail.com',

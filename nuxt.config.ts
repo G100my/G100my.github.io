@@ -1,10 +1,13 @@
-import Markdown from 'unplugin-vue-markdown/vite'
-
 const isProd = process.env.NODE_ENV === 'production' ? true : undefined
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxtjs/device'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n',
+    '@nuxtjs/device',
+    '@nuxt/content',
+  ],
   i18n: {
     locales: [
       { code: 'zh', file: './locales/zh.json', name: 'zh' },
@@ -45,18 +48,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'github-pages',
   },
-  components: [
-    { path: '~/contents', extensions: ['.md'], prefix: 'Markdown' },
-    '~/components',
-  ],
-  vite: {
-    vue: { include: [/\.vue$/, /\.md$/] },
-    plugins: [
-      Markdown({
-        wrapperClasses: 'markdown',
-        exclude: '_*.md',
-        wrapperComponent: 'article',
-      }),
-    ],
+  content: {
+    locales: ['en', 'zh'],
   },
 })

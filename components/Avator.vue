@@ -3,9 +3,9 @@
 import {
   Color,
   DirectionalLight,
-  Group,
+  type Group,
   HemisphereLight,
-  Object3DEventMap,
+  type Object3DEventMap,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
@@ -95,5 +95,5 @@ onMounted(() => {
 })
 </script>
 <template>
-  <canvas id="canvas" class="bg-transparent aspect-square w-[310px]" />
+  <canvas id="canvas" class="aspect-square w-[310px] bg-transparent" />
 </template>
