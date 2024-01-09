@@ -41,7 +41,7 @@ body {
 
 /* markdown */
 .markdown {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-4 p-4 pb-8 pt-6;
 }
 .markdown > ul {
   @apply list-disc pl-5;
