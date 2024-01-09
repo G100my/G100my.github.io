@@ -1,5 +1,21 @@
 <script setup lang="ts">
+import type Grid from 'muuri'
 import { MY_INFO } from '~/constants'
+
+const grid = ref<Grid>()
+
+const { $muuri } = useNuxtApp()
+onMounted(() => {
+  grid.value = new $muuri('#grid_container')
+  handleLayout()
+})
+
+function handleLayout() {
+  setTimeout(() => {
+    grid.value?.refreshItems()
+    grid.value?.layout()
+  }, 160)
+}
 </script>
 <template>
   <!-- <img src="~/assets/bg.png" class="fixed h-screen w-screen object-cover" /> -->
@@ -29,10 +45,9 @@ import { MY_INFO } from '~/constants'
       <h2>Contacts</h2>
       <ContactNavs class="mb-3 flex items-center justify-between gap-4" />
     </section>
-
-    <MarkdownAccordion article="about" />
-    <MarkdownAccordion article="projects" />
-    <MarkdownAccordion article="tech" />
+    <MarkdownAccordion article="about" @click="handleLayout" />
+    <MarkdownAccordion article="projects" @click="handleLayout" />
+    <MarkdownAccordion article="tech" @click="handleLayout" />
   </main>
 </template>
 <style>
@@ -44,7 +59,8 @@ import { MY_INFO } from '~/constants'
   @apply h-0.5 flex-1 border-b border-lochmara-950 bg-lochmara-50;
 }
 main > * {
-  @apply mx-auto w-4/12 max-w-md lg:m-5;
+  @apply mx-auto w-4/12 max-w-md;
+  @apply lg:absolute lg:m-5;
   /* @apply outline outline-8 outline-red-600; */
 }
 </style>

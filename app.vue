@@ -40,8 +40,8 @@ body {
 }
 
 /* markdown */
-.markdown > p {
-  @apply my-4 first:mt-0 last:mb-0;
+.markdown {
+  @apply flex flex-col gap-4;
 }
 .markdown > ul {
   @apply list-disc pl-5;
