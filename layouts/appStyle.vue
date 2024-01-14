@@ -8,20 +8,15 @@ const grid = ref<Grid>()
 
 const { $muuri } = useNuxtApp()
 onMounted(() => {
-  grid.value = new $muuri('#grid_container', {
-    layoutOnResize: true,
-    dragEnabled: true,
-    layout: {
-      fillGaps: true,
-      horizontal: true,
-      rounding: true,
-    },
-  })
+  grid.value = new $muuri('#grid_container', GRID_OPTIONS)
   const handler = (items: Item[]) => {
     items.forEach((i) => setLayoutInfo(i))
     grid.value!.off('layoutEnd', handler)
   }
   grid.value.on('layoutEnd', handler)
+
+  // @ts-ignore
+  window.grid = grid.value
 })
 
 const GridItem = (_props: any, content: SetupContext) =>
@@ -29,7 +24,7 @@ const GridItem = (_props: any, content: SetupContext) =>
     'section',
     {
       onClick: (event) => itemPositionHandler(event, grid.value!),
-      class: 'w-80 bg-black/50',
+      class: 'w-80',
     },
     content.slots.default?.(),
   )
@@ -84,7 +79,7 @@ const GridItem = (_props: any, content: SetupContext) =>
   @apply h-0.5 flex-1 border-b border-lochmara-950 bg-lochmara-50;
 }
 main > * {
-  @apply absolute m-10 transition-all;
+  @apply absolute m-10;
   /* @apply mx-auto max-w-md; */
   /* @apply lg:m-5 lg:w-4/12; */
   @apply outline outline-8 outline-red-600;

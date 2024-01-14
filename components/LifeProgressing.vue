@@ -5,7 +5,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
-  Object3DEventMap,
+  type Object3DEventMap,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
@@ -108,7 +108,7 @@ function doThree() {
     }
   }
 
-  const breatheSpeed = 0.002
+  const breatheSpeed = 0.01
   const breatheMax = 0.8
   const breatheMin = 0.05
   let breatheDirection = 1
@@ -165,9 +165,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <section>
-    <div id="life_progressing" class="h-full w-full" />
-  </section>
+  <div id="life_progressing" class="h-full w-full" />
 </template>
 <style>
 #life_progressing {

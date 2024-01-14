@@ -1,7 +1,7 @@
 const isProd = process.env.NODE_ENV === 'production' ? true : undefined
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  // devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
@@ -50,5 +50,6 @@ export default defineNuxtConfig({
   },
   content: {
     locales: ['en', 'zh'],
+    navigation: false,
   },
 })
