@@ -1,21 +1,38 @@
 <script setup lang="ts">
+import type { Item } from 'muuri'
 import type Grid from 'muuri'
+import type { SetupContext } from 'nuxt/dist/app/compat/capi'
 import { MY_INFO } from '~/constants'
 
 const grid = ref<Grid>()
 
 const { $muuri } = useNuxtApp()
 onMounted(() => {
-  grid.value = new $muuri('#grid_container')
-  handleLayout()
+  grid.value = new $muuri('#grid_container', {
+    layoutOnResize: true,
+    dragEnabled: true,
+    layout: {
+      fillGaps: true,
+      horizontal: true,
+      rounding: true,
+    },
+  })
+  const handler = (items: Item[]) => {
+    items.forEach((i) => setLayoutInfo(i))
+    grid.value!.off('layoutEnd', handler)
+  }
+  grid.value.on('layoutEnd', handler)
 })
 
-function handleLayout() {
-  setTimeout(() => {
-    grid.value?.refreshItems()
-    grid.value?.layout()
-  }, 160)
-}
+const GridItem = (_props: any, content: SetupContext) =>
+  h(
+    'section',
+    {
+      onClick: (event) => itemPositionHandler(event, grid.value!),
+      class: 'w-80 bg-black/50',
+    },
+    content.slots.default?.(),
+  )
 </script>
 <template>
   <!-- <img src="~/assets/bg.png" class="fixed h-screen w-screen object-cover" /> -->
@@ -25,12 +42,14 @@ function handleLayout() {
   <main
     id="grid_container"
     :class="[
-      'h-dvh relative w-screen space-y-5 overflow-auto px-10',
-      'lg:flex lg:flex-col',
+      'relative h-screen w-screen',
+      // 'space-y-5 px-10',
+      // 'lg:grid',
+      // 'lg:flex lg:flex-col',
       // 'bg-[url(~/assets/bg.png)]',
     ]"
   >
-    <section>
+    <GridItem>
       <h1 class="mt-10 py-3 text-center text-5xl">
         <p>[ {{ MY_INFO.name }} ]</p>
       </h1>
@@ -39,15 +58,21 @@ function handleLayout() {
         <!-- <Avator /> -->
         <div class="aspect-square w-[310px] bg-black">test</div>
       </div>
-    </section>
+      <div class="_contact">
+        <h2>Contacts</h2>
+        <ContactNavs class="mb-3 flex items-center justify-between gap-4" />
+      </div>
+    </GridItem>
 
-    <section class="_contact">
-      <h2>Contacts</h2>
-      <ContactNavs class="mb-3 flex items-center justify-between gap-4" />
-    </section>
-    <MarkdownAccordion article="about" @click="handleLayout" />
-    <MarkdownAccordion article="projects" @click="handleLayout" />
-    <MarkdownAccordion article="tech" @click="handleLayout" />
+    <GridItem>
+      <MarkdownAccordion article="about" />
+    </GridItem>
+    <GridItem>
+      <MarkdownAccordion article="projects" />
+    </GridItem>
+    <GridItem>
+      <MarkdownAccordion article="tech" />
+    </GridItem>
   </main>
 </template>
 <style>
@@ -59,8 +84,18 @@ function handleLayout() {
   @apply h-0.5 flex-1 border-b border-lochmara-950 bg-lochmara-50;
 }
 main > * {
-  @apply mx-auto w-4/12 max-w-md;
-  @apply lg:absolute lg:m-5;
-  /* @apply outline outline-8 outline-red-600; */
+  @apply absolute m-10 transition-all;
+  /* @apply mx-auto max-w-md; */
+  /* @apply lg:m-5 lg:w-4/12; */
+  @apply outline outline-8 outline-red-600;
+}
+.muuri-item-dragging {
+  z-index: 3;
+}
+.muuri-item-releasing {
+  z-index: 2;
+}
+.muuri-item-hidden {
+  z-index: 0;
 }
 </style>
