@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { before } from 'node:test'
 import { MY_INFO } from '~/constants'
 
 const { t } = useI18n()
@@ -14,17 +15,20 @@ const top = [
 </script>
 <template>
   <div class="relative mx-auto h-screen max-w-lg bg-slate-950">
+    <div class="_bg absolute h-full w-full" />
     <main
-      class="_container relative z-10 mx-auto h-screen min-h-screen snap-y snap-mandatory space-y-10 overflow-hidden overflow-y-auto p-10 text-white sm:no-scrollbar"
+      :class="[
+        '_container relative z-10 mx-auto h-screen min-h-screen snap-y snap-mandatory space-y-10 overflow-hidden overflow-y-auto p-10 text-white backdrop-blur-sm sm:no-scrollbar',
+      ]"
     >
-      <div class="h-full space-y-10">
+      <div class="relative z-10 space-y-10">
         <h1
           class="relative -z-10 -mx-10 space-y-3 bg-seagull-900 py-4 text-center text-5xl"
         >
           <p>Web Developer</p>
           <p>[ {{ MY_INFO.name }} ]</p>
         </h1>
-        <Avator />
+        <Avator class="mx-auto" />
         <section class="p-6">
           <ul class="space-y-1 text-base">
             <li v-for="i in top" class="flex">
@@ -32,18 +36,21 @@ const top = [
               <span class="whitespace-nowrap">{{ i }}</span>
             </li>
           </ul>
-          <ContactBlock class="mt-4" />
+          <ContactNavs class="mt-4 flex justify-between" />
         </section>
       </div>
 
       <section class="flex items-center">
-        <MarkdownAboutZh />
+        <Markdown article="about" />
       </section>
 
-      <TechBlock />
+      <section>
+        <Markdown article="tech" />
+        <TechList />
+      </section>
 
       <section>
-        <MarkdownHowCanIHelpZh />
+        <Markdown article="howcanihelp" />
       </section>
 
       <!-- spotify block -->
@@ -53,23 +60,27 @@ const top = [
 
       <!-- <LifeProgressing class="h-screen" /> -->
     </main>
+    <div
+      class="absolute bottom-1 left-1 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-white/50 text-3xl"
+    >
+      <LangSwitch />
+    </div>
   </div>
 </template>
 <style>
-._container {
+._bg {
   background-image: url('~/assets/bg.png');
   background-position-y: center;
   background-position-x: 46.4%;
 }
-section {
-  /* @apply rounded-lg bg-seagull-50/80 outline outline-2 outline-offset-4 outline-seagull-200 backdrop:blur-lg; */
+._container section {
   @apply rounded-lg bg-seagull-900/50 outline outline-2 outline-seagull-200 backdrop-blur-xl;
 }
-main > div,
-main > section {
+._container > div,
+._container > section {
   @apply max-h-full snap-center;
 }
-main > section {
+._container > section {
   @apply overflow-auto no-scrollbar;
 }
 

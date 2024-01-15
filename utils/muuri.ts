@@ -95,8 +95,4 @@ export function itemPositionHandler(event: MouseEvent, grid?: Grid) {
       )
     }
   }
-  console.log(
-    '🚀 ~ itemPositionHandler ~ GRID_OPTIONS.dragEnabled:',
-    GRID_OPTIONS.dragEnabled,
-  )
 }

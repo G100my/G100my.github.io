@@ -69,7 +69,7 @@ const GridItem = (_props: any, content: SetupContext) =>
       <MarkdownAccordion article="tech" />
     </GridItem>
     <GridItem>
-      <TechBlock />
+      <TechList />
     </GridItem>
     <GridItem>
       <!-- <LifeProgressing /> -->
@@ -78,6 +78,14 @@ const GridItem = (_props: any, content: SetupContext) =>
   </main>
 </template>
 <style>
+/* markdown */
+.markdown {
+  @apply flex flex-col gap-4 p-4 pb-8 pt-6;
+}
+.markdown > ul {
+  @apply list-disc pl-5;
+}
+
 ._contact > h2 {
   @apply my-1 flex items-center text-center text-lg before:mr-4 after:ml-4;
 }
@@ -85,7 +93,7 @@ const GridItem = (_props: any, content: SetupContext) =>
 ._contact > h2::after {
   @apply h-0.5 flex-1 border-b border-lochmara-950 bg-lochmara-50;
 }
-main > * {
+#grid_container > * {
   @apply absolute m-10;
   /* @apply mx-auto max-w-md; */
   /* @apply lg:m-5 lg:w-4/12; */

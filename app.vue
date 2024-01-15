@@ -1,15 +1,14 @@
 <template>
   <!-- <NuxtLayout> -->
-  <NuxtLayout name="app-style">
+  <NuxtLayout name="default">
     <NuxtPage />
   </NuxtLayout>
-
-  <LangSwitch />
 </template>
 <style>
 /* font */
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 
+/* common */
 p,
 span,
 h1,
@@ -33,17 +32,7 @@ p {
   font-family: jf-jinxuanlatte;
 }
 
-/* common */
-
 body {
   @apply bg-black;
-}
-
-/* markdown */
-.markdown {
-  @apply flex flex-col gap-4 p-4 pb-8 pt-6;
-}
-.markdown > ul {
-  @apply list-disc pl-5;
 }
 </style>
