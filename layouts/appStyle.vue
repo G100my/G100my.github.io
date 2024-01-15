@@ -68,6 +68,13 @@ const GridItem = (_props: any, content: SetupContext) =>
     <GridItem>
       <MarkdownAccordion article="tech" />
     </GridItem>
+    <GridItem>
+      <TechBlock />
+    </GridItem>
+    <GridItem>
+      <!-- <LifeProgressing /> -->
+      <div class="h-[500px] w-80 bg-black"></div>
+    </GridItem>
   </main>
 </template>
 <style>

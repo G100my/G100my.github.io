@@ -13,3 +13,12 @@ export const MY_INFO = computed(() => {
     location: t('me.location'),
   }
 })
+
+export const TransitionAttrs = {
+  enterActiveClass: 'duration-150 ease-linear transition-opacity',
+  enterFromClass: 'opacity-0',
+  enterToClass: 'opacity-100',
+  leaveActiveClass: 'duration-100 ease-linear transition-opacity',
+  leaveFromClass: 'opacity-100',
+  leaveToClass: 'opacity-0',
+}
