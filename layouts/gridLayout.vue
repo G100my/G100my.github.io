@@ -1,33 +1,8 @@
 <script setup lang="ts">
-import type { Item } from 'muuri'
-import type Grid from 'muuri'
-import type { SetupContext } from 'nuxt/dist/app/compat/capi'
+import useMuuri from '~/composables/muuri'
 import { MY_INFO } from '~/constants'
 
-const grid = ref<Grid>()
-
-const { $muuri } = useNuxtApp()
-onMounted(() => {
-  grid.value = new $muuri('#grid_container', GRID_OPTIONS)
-  const handler = (items: Item[]) => {
-    items.forEach((i) => setLayoutInfo(i))
-    grid.value!.off('layoutEnd', handler)
-  }
-  grid.value.on('layoutEnd', handler)
-
-  // @ts-ignore
-  window.grid = grid.value
-})
-
-const GridItem = (_props: any, content: SetupContext) =>
-  h(
-    'section',
-    {
-      onClick: (event) => itemPositionHandler(event, grid.value!),
-      class: 'w-80',
-    },
-    content.slots.default?.(),
-  )
+useMuuri('#grid_container', { init: true })
 </script>
 <template>
   <!-- <img src="~/assets/bg.png" class="fixed h-screen w-screen object-cover" /> -->
@@ -59,8 +34,10 @@ const GridItem = (_props: any, content: SetupContext) =>
       </div>
     </GridItem>
 
-    <GridItem>
-      <MarkdownAccordion article="about" />
+    <GridItem v-slot="{ isScale }">
+      <pre>{{ isScale }}</pre>
+      <div v-if="isScale">test</div>
+      <MarkdownAccordion v-else article="about" />
     </GridItem>
     <GridItem>
       <MarkdownAccordion article="projects" />
@@ -74,6 +51,11 @@ const GridItem = (_props: any, content: SetupContext) =>
     <GridItem>
       <!-- <LifeProgressing /> -->
       <div class="h-[500px] w-80 bg-black"></div>
+    </GridItem>
+    <GridItem unscalable size="sm">
+      <LangSwitch
+        class="flex h-20 w-full items-center justify-center !text-6xl"
+      />
     </GridItem>
   </main>
 </template>
@@ -94,10 +76,10 @@ const GridItem = (_props: any, content: SetupContext) =>
   @apply h-0.5 flex-1 border-b border-lochmara-950 bg-lochmara-50;
 }
 #grid_container > * {
-  @apply absolute m-10;
+  /* @apply absolute; */
   /* @apply mx-auto max-w-md; */
   /* @apply lg:m-5 lg:w-4/12; */
-  @apply outline outline-8 outline-red-600;
+  @apply outline outline-1 outline-red-600;
 }
 .muuri-item-dragging {
   z-index: 3;
