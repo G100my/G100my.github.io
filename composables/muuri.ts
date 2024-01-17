@@ -39,7 +39,7 @@ export default function useMuuri(
     dragEnabled: false,
     layout: {
       fillGaps: true,
-      horizontal: true,
+      // horizontal: true,
     },
   }
 
@@ -53,8 +53,8 @@ export default function useMuuri(
     if (el.dataset.open == '0') {
       el.dataset.open = '1'
       {
-        el.style.width = '100vw'
-        el.style.height = '100vh'
+        el.style.width = '100%'
+        el.style.height = '100%'
         el.style.zIndex = '1'
         el.style.margin = '0px'
         el.style.transform = `translateX(${0}px) translateY(${0}px)`
@@ -68,7 +68,6 @@ export default function useMuuri(
             gridStack[containerQuery].remove([
               gridStack[containerQuery].getItem(el)!,
             ])
-            console.log('!!')
           },
           { once: true },
         )
@@ -118,7 +117,9 @@ export default function useMuuri(
     }
     gridStack[containerQuery].on('layoutEnd', handler)
     // @ts-ignore
-    window.grid = gridStack[containerQuery].value
+    window.grid = gridStack[containerQuery]
+    // @ts-ignore
+    window.gridStack = gridStack
   })
 
   return {
