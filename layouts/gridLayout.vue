@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import useMuuri from '~/composables/muuri'
-import { MY_INFO } from '~/constants'
+import type Grid from 'muuri'
 
-useMuuri('#grid_container', { init: true })
+const { $muuri } = useNuxtApp()
+const signal = ref(false)
+provide('createAnime', readonly(signal))
+let grid: Grid
+onMounted(() => {
+  grid = new $muuri('#grid_container', GRID_OPTIONS)
+  grid.on('layoutEnd', () => {
+    signal.value = true
+  })
+})
 </script>
 <template>
   <!-- <img src="~/assets/bg.png" class="fixed h-screen w-screen object-cover" /> -->
