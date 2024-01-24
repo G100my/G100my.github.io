@@ -3,7 +3,7 @@ import type { GridOptions, Item } from 'muuri'
 
 export const GRID_OPTIONS: GridOptions = {
   layoutOnResize: true,
-  dragEnabled: false,
+  dragEnabled: true,
   layout: {
     fillGaps: true,
     // horizontal: true,

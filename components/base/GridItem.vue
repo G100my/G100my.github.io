@@ -22,9 +22,19 @@ const getSizeClass = (size: GridItemSize) => {
 
 const sizeClass = getSizeClass(props.size)
 const isScale = ref(false)
+
+let isDragging = false
 const clickHandler = (event: MouseEvent) => {
-  if (props.unscalable) return
-  isScale.value = !isScale.value
+  if (props.unscalable || isDragging) return
+
+  if (isScale.value) {
+    anime.finished.then(() => {
+      isScale.value = !isScale.value
+    })
+  } else {
+    isScale.value = !isScale.value
+    anime = createAnime(container.value!)
+  }
   anime.play()
 }
 
@@ -57,35 +67,28 @@ function createAnime(node: HTMLElement): Anime.AnimeInstance {
   return anime
 }
 
-const signal = inject<Ref<boolean>>('createAnime')
-const unwatch = watch(
-  () => signal?.value,
-  (v) => {
-    if (!v) return
-    anime = createAnime(container.value!)
-    unwatch()
-  },
-)
+// const signal = inject<Ref<boolean>>('createAnime')
+// watch(
+//   () => signal?.value,
+//   (v) => {
+//     if (!v) return
+//     anime = createAnime(container.value!)
+//   },
+// )
 </script>
 <template>
   <section
     :class="[
       'absolute',
       sizeClass,
+      { 'z-10': isScale },
       // { 'flex items-center justify-center bg-black/30': isScale },
     ]"
     @click="clickHandler"
+    @mousedown="isDragging = false"
+    @mousemove="isDragging = true"
   >
-    <div
-      ref="container"
-      class="border p-4"
-      :class="[
-        'bg-blue-700',
-        {
-          // sizeClass: !isScale
-        },
-      ]"
-    >
+    <div ref="container" class="border p-4" :class="['bg-blue-700']">
       <slot v-bind="{ isScale }" />
     </div>
   </section>

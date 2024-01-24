@@ -2,14 +2,17 @@
 import type Grid from 'muuri'
 
 const { $muuri } = useNuxtApp()
-const signal = ref(false)
-provide('createAnime', readonly(signal))
+// const signal = ref(false)
+// provide('createAnime', readonly(signal))
 let grid: Grid
 onMounted(() => {
   grid = new $muuri('#grid_container', GRID_OPTIONS)
-  grid.on('layoutEnd', () => {
-    signal.value = true
-  })
+  // grid.on('layoutEnd', () => {
+  //   signal.value = true
+  // })
+  // grid.on('layoutStart', () => {
+  //   signal.value = false
+  // })
 })
 </script>
 <template>
