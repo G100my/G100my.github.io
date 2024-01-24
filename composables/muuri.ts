@@ -1,6 +1,15 @@
 import type Grid from 'muuri'
 import type { GridOptions, Item } from 'muuri'
 
+export const GRID_OPTIONS: GridOptions = {
+  layoutOnResize: true,
+  dragEnabled: false,
+  layout: {
+    fillGaps: true,
+    // horizontal: true,
+  },
+}
+
 const gridStack = reactive<{ [key: string]: Grid }>({})
 export default function useMuuri(
   containerQuery: string,
@@ -20,10 +29,8 @@ export default function useMuuri(
     el.dataset.initLayout = [top, left, i.getWidth(), i.getHeight()].join()
     el.addEventListener('mousedown', () => (isDragging = false))
     el.addEventListener('mousemove', () => (isDragging = true))
-
-    // @ts-ignore
-    if (import.meta.dev) el.item = i
   }
+
   function parseLayoutInfo(s: string) {
     const [top, left, width, height] = s.split(',')
     return {
@@ -32,15 +39,6 @@ export default function useMuuri(
       width,
       height,
     }
-  }
-
-  const GRID_OPTIONS: GridOptions = {
-    layoutOnResize: true,
-    dragEnabled: false,
-    layout: {
-      fillGaps: true,
-      // horizontal: true,
-    },
   }
 
   function itemPositionHandler(event: MouseEvent) {
@@ -109,17 +107,19 @@ export default function useMuuri(
   onMounted(() => {
     if ('_id' in gridStack[containerQuery] || !options?.init) return
 
-    // Object.assign(current, new $muuri(containerQuery, GRID_OPTIONS))
+    // Object.assign(
+    //   gridStack[containerQuery],
+    //   new $muuri(containerQuery, GRID_OPTIONS),
+    // )
+
     gridStack[containerQuery] = new $muuri(containerQuery, GRID_OPTIONS)
-    const handler = (items: Item[]) => {
-      items.forEach((i) => setLayoutInfo(i))
-      gridStack[containerQuery].off('layoutEnd', handler)
-    }
-    gridStack[containerQuery].on('layoutEnd', handler)
+
     // @ts-ignore
-    window.grid = gridStack[containerQuery]
+    // window.grid = gridStack[containerQuery]
     // @ts-ignore
-    window.gridStack = gridStack
+    // window.muuri = $muuri
+    // @ts-ignore
+    // window.gridStack = gridStack
   })
 
   return {
