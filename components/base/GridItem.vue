@@ -2,29 +2,25 @@
 import Anime from 'animejs'
 
 type GridItemSize = 'sm' | 'md' | undefined
-const props = defineProps<{
-  size?: GridItemSize
-  unscalable?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    size?: GridItemSize
+    unscalable?: boolean
+    col: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  }>(),
+  {
+    col: 10,
+  },
+)
 
 let anime: Anime.AnimeInstance
 const container = ref<HTMLElement>()
 
-const getSizeClass = (size: GridItemSize) => {
-  switch (size) {
-    case 'sm':
-      return 'w-40'
-    default:
-    case 'md':
-      return 'w-1/3'
-  }
-}
-
-const sizeClass = getSizeClass(props.size)
 const isScale = ref(false)
 
 let isDragging = false
 const clickHandler = (event: MouseEvent) => {
+  if (Anime.running.length) return
   if (props.unscalable || isDragging) return
 
   if (isScale.value) {
@@ -38,57 +34,77 @@ const clickHandler = (event: MouseEvent) => {
   anime.play()
 }
 
+const colSteps = 12
 function createAnime(node: HTMLElement): Anime.AnimeInstance {
   const margin = Anime.get(node, 'margin')
   const { left, width, height, top } = node.getBoundingClientRect()
-  const translateX = Anime.get(node, 'translateX')
-  const translateY = Anime.get(node, 'translateY')
+  const translateXfrom = Anime.get(node, 'translateX')
+  const translateYfrom = Anime.get(node, 'translateY')
 
-  const vw = window.innerWidth
-  const vh = window.innerHeight
+  const scaledW = (window.innerWidth * props.col) / colSteps
+  const scaledH = (window.innerHeight * props.col) / colSteps
 
-  const anime = Anime({
+  const translateYto =
+    (window.innerHeight * (colSteps - props.col)) / colSteps / 2 - top
+  const translateXto =
+    (window.innerWidth * (colSteps - props.col)) / colSteps / 2 - left
+
+  const anime = Anime.timeline({
     autoplay: false,
     loop: false,
-    duration: 200,
-    zIndex: 0,
-    targets: node,
-    margin: [margin, 0],
-    width: [width, vw],
-    height: [height, vh],
-    position: 'fixed',
+    duration: 100,
+    easing: 'linear',
+    zIndex: 10,
     loopComplete: (anime) => {
       anime.reverse()
     },
-    translateX: [translateX, -left],
-    translateY: [translateY, -top],
   })
+    .add({
+      targets: '#mask',
+      backdropFilter: 'blur(10px)',
+      height: '100vh',
+    })
+    .add({
+      targets: node,
+      translateX: [translateXfrom, translateXto],
+    })
+    .add({
+      targets: node,
+      translateY: [translateYfrom, translateYto],
+    })
+    .add({
+      targets: node,
+      width: [width, scaledW],
+    })
+    .add({
+      targets: node,
+      height: [height, scaledH],
+    })
+    .add({
+      targets: node,
+      margin: [margin, 0],
+      backgroundColor: '#175775',
+    })
 
   return anime
 }
-
-// const signal = inject<Ref<boolean>>('createAnime')
-// watch(
-//   () => signal?.value,
-//   (v) => {
-//     if (!v) return
-//     anime = createAnime(container.value!)
-//   },
-// )
 </script>
 <template>
   <section
     :class="[
-      'absolute',
-      sizeClass,
+      'absolute w-2/6',
       { 'z-10': isScale },
-      // { 'flex items-center justify-center bg-black/30': isScale },
+      'border border-lochmara-600',
     ]"
     @click="clickHandler"
     @mousedown="isDragging = false"
     @mousemove="isDragging = true"
   >
-    <div ref="container" class="border p-4" :class="['bg-blue-700']">
+    <div
+      data-name="grid_item_content"
+      ref="container"
+      class="flex flex-col items-center justify-center p-4"
+    >
       <slot v-bind="{ isScale }" />
     </div>
   </section>

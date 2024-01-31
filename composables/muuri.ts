@@ -6,7 +6,6 @@ export const GRID_OPTIONS: GridOptions = {
   dragEnabled: true,
   layout: {
     fillGaps: true,
-    // horizontal: true,
   },
 }
 

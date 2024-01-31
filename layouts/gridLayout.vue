@@ -1,18 +1,11 @@
 <script setup lang="ts">
 import type Grid from 'muuri'
+import { MY_INFO } from '~/constants'
 
 const { $muuri } = useNuxtApp()
-// const signal = ref(false)
-// provide('createAnime', readonly(signal))
 let grid: Grid
 onMounted(() => {
   grid = new $muuri('#grid_container', GRID_OPTIONS)
-  // grid.on('layoutEnd', () => {
-  //   signal.value = true
-  // })
-  // grid.on('layoutStart', () => {
-  //   signal.value = false
-  // })
 })
 </script>
 <template>
@@ -20,55 +13,66 @@ onMounted(() => {
   <div
     class="fixed inset-0 h-screen w-full bg-gradient-to-b from-lochmara-50/90 from-30% to-lochmara-800/80"
   />
-  <main
-    id="grid_container"
-    :class="[
-      'relative h-screen w-screen',
-      // 'space-y-5 px-10',
-      // 'lg:grid',
-      // 'lg:flex lg:flex-col',
-      // 'bg-[url(~/assets/bg.png)]',
-    ]"
-  >
-    <GridItem>
-      <h1 class="mt-10 py-3 text-center text-5xl">
-        <p>[ {{ MY_INFO.name }} ]</p>
-      </h1>
+  <div class="p-10">
+    <main id="grid_container" :class="['relative']">
+      <GridItem unscalable>
+        <h1 class="py-3 text-center text-5xl">
+          <p>[ {{ MY_INFO.name }} ]</p>
+        </h1>
 
-      <div class="_gradient_border mx-auto w-fit rounded-full">
-        <!-- <Avator /> -->
-        <div class="aspect-square w-[310px] bg-black">test</div>
-      </div>
-      <div class="_contact">
-        <h2>Contacts</h2>
-        <ContactNavs class="mb-3 flex items-center justify-between gap-4" />
-      </div>
-    </GridItem>
+        <div class="_gradient_border mx-auto w-fit rounded-full">
+          <Avator />
+        </div>
 
-    <GridItem v-slot="{ isScale }">
-      <pre>{{ isScale }}</pre>
-      <div v-if="isScale">test</div>
-      <MarkdownAccordion v-else article="about" />
-    </GridItem>
-    <GridItem>
-      <MarkdownAccordion article="projects" />
-    </GridItem>
-    <GridItem>
-      <MarkdownAccordion article="tech" />
-    </GridItem>
-    <GridItem>
-      <TechList />
-    </GridItem>
-    <GridItem>
-      <!-- <LifeProgressing /> -->
-      <div class="h-[500px] w-80 bg-black"></div>
-    </GridItem>
-    <GridItem unscalable size="sm">
-      <LangSwitch
-        class="flex h-20 w-full items-center justify-center !text-6xl"
-      />
-    </GridItem>
-  </main>
+        <div class="_contact">
+          <h2>Contacts</h2>
+          <ContactNavs class="mb-3 flex items-center justify-around gap-4" />
+        </div>
+      </GridItem>
+
+      <GridItem v-slot="{ isScale }" :col="6">
+        <MarkdownBlock article="about" :open="isScale" />
+        <!-- <MarkdownAccordion v-else article="about" /> -->
+      </GridItem>
+      <GridItem v-slot="{ isScale }">
+        <MarkdownBlock article="projects" :open="isScale" />
+      </GridItem>
+      <GridItem v-slot="{ isScale }">
+        <MarkdownBlock article="tech" :open="isScale" />
+      </GridItem>
+      <GridItem>
+        <TechList />
+      </GridItem>
+      <GridItem>
+        <div
+          class="flex h-[500px] w-full items-center justify-center bg-black text-white"
+        >
+          LifeProgressing
+        </div>
+      </GridItem>
+      <GridItem>
+        <div
+          class="flex h-[500px] w-full items-center justify-center bg-black text-white"
+        >
+          spotify
+        </div>
+      </GridItem>
+      <GridItem>
+        <div
+          class="flex h-[500px] w-full items-center justify-center bg-black text-white"
+        >
+          todolist
+        </div>
+      </GridItem>
+
+      <GridItem unscalable class="!w-1/6">
+        <LangSwitch
+          class="flex h-20 w-full items-center justify-center !text-6xl"
+        />
+      </GridItem>
+    </main>
+    <div id="mask" class="fixed inset-0 h-0" />
+  </div>
 </template>
 <style>
 /* markdown */
@@ -85,12 +89,6 @@ onMounted(() => {
 ._contact > h2::before,
 ._contact > h2::after {
   @apply h-0.5 flex-1 border-b border-lochmara-950 bg-lochmara-50;
-}
-#grid_container > * {
-  /* @apply absolute; */
-  /* @apply mx-auto max-w-md; */
-  /* @apply lg:m-5 lg:w-4/12; */
-  @apply outline outline-1 outline-red-600;
 }
 .muuri-item-dragging {
   z-index: 3;
