@@ -26,11 +26,10 @@ import { MY_INFO } from '~/constants'
 </template>
 <style scoped>
 nav > a {
-  @apply outline outline-2 outline-offset-2 outline-alto-200 lg:outline-offset-0;
-  @apply flex aspect-square w-10 items-center justify-center rounded-full shadow-lg;
-  @apply bg-gradient-to-b from-sundown-100 from-20% to-seagull-600;
+  @apply flex aspect-square items-center justify-center;
+  @apply rounded-lg p-3 text-5xl shadow-lg;
 }
 nav > a > i {
-  @apply flex aspect-square h-10 items-center justify-center rounded-full p-1 text-xl leading-none lg:text-3xl;
+  @apply flex aspect-square items-center justify-center leading-none;
 }
 </style>

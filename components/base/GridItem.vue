@@ -83,7 +83,7 @@ function createAnime(node: HTMLElement): Anime.AnimeInstance {
     .add({
       targets: node,
       margin: [margin, 0],
-      backgroundColor: '#175775',
+      borderWidth: 16,
     })
 
   return anime
@@ -103,7 +103,7 @@ function createAnime(node: HTMLElement): Anime.AnimeInstance {
     <div
       data-name="grid_item_content"
       ref="container"
-      class="flex flex-col items-center justify-center p-4"
+      class="flex flex-col items-center justify-center border-0 border-seagull-300"
     >
       <slot v-bind="{ isScale }" />
     </div>
