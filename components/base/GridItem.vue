@@ -24,12 +24,12 @@ const clickHandler = (event: MouseEvent) => {
   if (props.unscalable || isDragging) return
 
   if (isScale.value) {
+    isScale.value = !isScale.value
+  } else {
+    anime = createAnime(container.value!)
     anime.finished.then(() => {
       isScale.value = !isScale.value
     })
-  } else {
-    isScale.value = !isScale.value
-    anime = createAnime(container.value!)
   }
   anime.play()
 }
@@ -65,7 +65,12 @@ function createAnime(node: HTMLElement): Anime.AnimeInstance {
       height: '100vh',
     })
     .add({
+      targets: node.parentNode,
+      zIndex: 10,
+    })
+    .add({
       targets: node,
+      backgroundColor: '#fff',
       translateX: [translateXfrom, translateXto],
     })
     .add({
@@ -91,11 +96,7 @@ function createAnime(node: HTMLElement): Anime.AnimeInstance {
 </script>
 <template>
   <section
-    :class="[
-      'absolute w-2/6',
-      { 'z-10': isScale },
-      'border border-lochmara-600',
-    ]"
+    :class="['absolute w-2/6', 'border border-lochmara-600']"
     @click="clickHandler"
     @mousedown="isDragging = false"
     @mousemove="isDragging = true"
