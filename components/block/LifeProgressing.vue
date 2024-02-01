@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { theme } from '#tailwind-config'
 import {
   BoxGeometry,
   Color,
@@ -21,8 +22,9 @@ const nowIndex = (y - 1991) * 12 + (m - 0)
 // 70 * 12 = 28 * 30 = 21 * 40 = 840
 const LIFE_CUBE_COLS = 21
 const LIFE_CUBE_ROWS = 40
-const CONTAINER_BG_COLOR = '#020617' // bg-slate-950
-const CUBE_COLOR = '#172554' // bg-blue-950
+// const CONTAINER_BG_COLOR = theme.colors.lochmara[100]
+const PAST_CUBE_COLOR = theme.colors.seagull[800]
+const FUTURE_CUBE_COLOR = theme.colors.seagull[600]
 
 let container: HTMLElement
 
@@ -61,7 +63,8 @@ function doThree() {
   const Z = (totalH / 2) * 1.05
 
   const scene = new Scene()
-  scene.background = new Color(CONTAINER_BG_COLOR)
+
+  // scene.background = new Color(CONTAINER_BG_COLOR)
   const camera = new PerspectiveCamera(FOV, ASPECT, 1, 1000)
   camera.position.z = Z
   camera.position.x = ((LIFE_CUBE_COLS - 1) * (CUBE_SIZE + GAP_COL)) / 2
@@ -74,7 +77,7 @@ function doThree() {
   >[] = []
   let intensity = 0.05
 
-  const renderer = new WebGLRenderer()
+  const renderer = new WebGLRenderer({ alpha: true })
   renderer.setSize(w, h)
   container.appendChild(renderer.domElement)
 
@@ -84,13 +87,16 @@ function doThree() {
     for (let r = 0; r < LIFE_CUBE_ROWS; r++) {
       const geometry = new BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE)
       const isCurrent = r * LIFE_CUBE_COLS + c === nowIndex
+      const index = r * LIFE_CUBE_COLS + c
       const material = isCurrent
         ? new MeshStandardMaterial({
-            color: CUBE_COLOR,
+            color: PAST_CUBE_COLOR,
             emissive: 'white',
             emissiveIntensity: intensity,
           })
-        : new MeshBasicMaterial({ color: CUBE_COLOR })
+        : new MeshBasicMaterial({
+            color: index < nowIndex ? PAST_CUBE_COLOR : FUTURE_CUBE_COLOR,
+          })
       let cube = new Mesh(geometry, material)
       if (isCurrent)
         currentCube = cube as Mesh<
@@ -166,6 +172,13 @@ onMounted(() => {
 </script>
 <template>
   <div id="life_progressing" class="h-full w-full" />
+  <div
+    class="absolute inset-0 m-auto flex h-fit w-full flex-col items-center justify-center rounded-xl bg-alto-400/30 p-6 font-black"
+  >
+    <p class="text-6xl">{{ ((nowIndex / (70 * 12)) * 100).toFixed(2) }}%</p>
+    <hr class="h-2 w-full bg-current" />
+    <p class="text-3xl">If I have 70 years</p>
+  </div>
 </template>
 <style>
 #life_progressing {

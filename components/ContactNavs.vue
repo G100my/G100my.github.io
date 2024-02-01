@@ -27,7 +27,7 @@ import { MY_INFO } from '~/constants'
 <style scoped>
 nav > a {
   @apply flex aspect-square items-center justify-center;
-  @apply rounded-lg p-3 text-5xl shadow-lg;
+  @apply rounded-lg p-3 text-3xl shadow-lg;
 }
 nav > a > i {
   @apply flex aspect-square items-center justify-center leading-none;

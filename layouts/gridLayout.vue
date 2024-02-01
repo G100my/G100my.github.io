@@ -1,26 +1,27 @@
 <script setup lang="ts">
 import type Grid from 'muuri'
-import { MY_INFO } from '~/constants'
+import { MY_INFO, gridInjectionKey } from '~/constants'
 
 const { $muuri } = useNuxtApp()
-let grid: Grid
+const grid = ref<Grid>()
 onMounted(() => {
-  grid = new $muuri('#grid_container', GRID_OPTIONS)
+  grid.value = new $muuri('#grid_container', GRID_OPTIONS)
 })
+provide(gridInjectionKey, grid)
 </script>
 <template>
   <!-- <img src="~/assets/bg.png" class="fixed h-screen w-screen object-cover" /> -->
   <div
     class="fixed inset-0 h-screen w-full bg-gradient-to-b from-lochmara-50/90 from-30% to-lochmara-800/80"
   />
-  <div class="p-10">
+  <div class="container mx-auto p-10">
     <main id="grid_container" :class="['relative']">
-      <GridItem unscalable>
+      <GridItem unscalable class="p-3">
         <h1 class="py-3 text-center text-5xl">
           <p>[ {{ MY_INFO.name }} ]</p>
         </h1>
 
-        <div class="_gradient_border mx-auto w-fit rounded-full">
+        <div class="mx-auto w-fit rounded-full">
           <Avator />
         </div>
 
@@ -30,7 +31,7 @@ onMounted(() => {
         </div>
       </GridItem>
 
-      <GridItem v-slot="{ isScale }" :col="6">
+      <GridItem v-slot="{ isScale }">
         <MarkdownBlock article="about" :open="isScale" />
         <!-- <MarkdownAccordion v-else article="about" /> -->
       </GridItem>
@@ -38,16 +39,13 @@ onMounted(() => {
         <MarkdownBlock article="projects" :open="isScale" />
       </GridItem>
       <GridItem v-slot="{ isScale }">
-        <MarkdownBlock article="tech" :open="isScale" />
+        <MarkdownBlock article="tech" :open="isScale">
+          <TechList />
+        </MarkdownBlock>
       </GridItem>
-      <GridItem>
-        <TechList />
-      </GridItem>
-      <GridItem>
-        <div
-          class="flex h-[500px] w-full items-center justify-center bg-black text-white"
-        >
-          LifeProgressing
+      <GridItem unscalable>
+        <div class="w-g4 h-g6">
+          <LifeProgressing />
         </div>
       </GridItem>
       <GridItem>
@@ -57,17 +55,16 @@ onMounted(() => {
           spotify
         </div>
       </GridItem>
-      <GridItem>
-        <div
-          class="flex h-[500px] w-full items-center justify-center bg-black text-white"
-        >
-          todolist
-        </div>
+      <GridItem class="py-4 lg:py-0" v-slot="{ isScale }">
+        <Todolist
+          class="h-full px-4 py-2 no-scrollbar"
+          :class="{ 'max-h-96 max-w-sm': !isScale }"
+        />
       </GridItem>
 
-      <GridItem unscalable class="!w-1/6">
+      <GridItem unscalable>
         <LangSwitch
-          class="flex h-20 w-full items-center justify-center !text-6xl"
+          class="flex h-24 w-24 items-center justify-center !text-6xl"
         />
       </GridItem>
     </main>
@@ -76,13 +73,18 @@ onMounted(() => {
 </template>
 <style>
 /* markdown */
-.markdown {
-  @apply flex flex-col gap-4 p-4 pb-8 pt-6;
+._markdown {
+  @apply flex flex-col gap-4 px-4 py-6 text-base lg:px-8 lg:py-10 lg:text-lg;
 }
-.markdown > ul {
+._markdown > ul {
   @apply list-disc pl-5;
 }
-
+._markdown p {
+  @apply leading-normal;
+}
+._markdown li {
+  @apply leading-snug;
+}
 ._contact > h2 {
   @apply my-1 flex items-center text-center text-lg before:mr-4 after:ml-4;
 }

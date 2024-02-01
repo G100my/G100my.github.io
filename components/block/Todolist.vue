@@ -5,13 +5,15 @@ const truncatedList = todolist.filter((i) => !!i.event)
 const showZh = computed(() => locale.value === 'zh')
 </script>
 <template>
-  <ul class="mx-8 flex-1 space-y-1 overflow-y-auto rounded-lg border px-4 py-2">
+  <ul class="rounded-inherit space-y-1 overflow-y-auto lg:space-y-2">
     <li v-for="t in truncatedList">
       <p class="flex text-sm">
         <span class="w-7">{{ t.i + '.' }}</span>
-        <span :class="{ 'line-through': t.checked }" class="mr-1 flex-1">{{
-          showZh ? t.event : t.event_en
-        }}</span>
+        <span
+          :class="{ 'line-through': t.checked }"
+          class="mr-1 flex-1 lg:ml-2 lg:mr-6"
+          >{{ showZh ? t.event : t.event_en }}</span
+        >
         <time class="self-end text-xs">{{ t.updated_at }}</time>
       </p>
     </li>

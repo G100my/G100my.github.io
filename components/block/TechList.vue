@@ -16,12 +16,10 @@ import IconTypeScript from '@/assets/tech/TypeScript.svg'
 import IconVue from '@/assets/tech/vue.svg'
 import IconReact from '@/assets/tech/React.svg'
 
-const mainTechList = [
-  { icon: IconVue, name: 'Vue' },
-  { icon: IconTypeScript, name: 'TypeScript' },
-  { icon: IconTailwindCSS, name: 'Tailwind CSS' },
-]
-const others = [
+const list = [
+  { icon: IconVue, name: 'Vue', good: true },
+  { icon: IconTypeScript, name: 'TypeScript', good: true },
+  { icon: IconTailwindCSS, name: 'Tailwind CSS', good: true },
   { icon: IconHTML5, name: 'HTML5' },
   { icon: IconCss3, name: 'CSS3' },
   { icon: IconJavaScript, name: 'JavaScript' },
@@ -39,20 +37,30 @@ const others = [
 </script>
 <template>
   <ul
-    v-for="list in [mainTechList, others]"
-    class="flex w-full flex-wrap justify-center gap-x-1 gap-y-5 pt-2 first:pt-0"
+    class="flex w-full flex-wrap justify-center gap-x-1 gap-y-5 pt-2 first:pt-0 lg:gap-6"
   >
     <li
       v-for="i in list"
-      class="flex w-[64px] flex-shrink-0 flex-col items-center gap-1.5"
+      class="relative flex flex-shrink-0 flex-col items-center gap-1.5"
+      :class="{
+        'after:absolute after:right-0 after:top-0 after:block after:content-[\'\uD83D\uDC4D\']':
+          i.good,
+      }"
     >
       <img
         :src="i.icon"
         :alt="i.name"
-        class="h-5 w-5 sm:h-8 sm:w-8"
+        class="_gradient h-5 w-5 sm:h-8 sm:w-8 lg:h-12 lg:w-12"
         :title="i.name"
       />
-      <span class="whitespace-pre-line text-center text-xs">{{ i.name }}</span>
+      <span class="whitespace-pre-line text-center text-xs sm:text-sm">{{
+        i.name
+      }}</span>
     </li>
   </ul>
 </template>
+<style>
+._gradient {
+  background: radial-gradient(theme('colors.seagull.200'), transparent 70%);
+}
+</style>

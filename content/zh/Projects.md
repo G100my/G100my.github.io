@@ -1,5 +1,5 @@
 ---
-title: Side project
+title: 曾經做過的小東西
 ---
 
 ## Space radio(Jukebox)
@@ -25,5 +25,5 @@ Space radio 是一個基於 Spotify API 及 Realtime database 的空間背景音
 
 ## Your harbour lover
 
-- 為好朋友製作的個人網站，單純為了好玩。
+- 為我的好朋友製作的個人網站，單純為了好玩。
 - 串接 Google Apps script 讓朋友能使用 Google sheets 作為推薦商家列表的後台，能自己輕易地更新資料。

@@ -10,6 +10,6 @@ defineProps<{
     v-slot="{ data }"
     find="one"
   >
-    <ContentRenderer :value="data" class="markdown" />
+    <ContentRenderer :value="data" class="_markdown" />
   </ContentQuery>
 </template>

@@ -1,4 +1,3 @@
-import { useI18n } from '#imports'
 export const MY_INFO = computed(() => {
   const t = useNuxtApp().$i18n.t
   return {
@@ -22,3 +21,5 @@ export const TransitionAttrs = {
   leaveFromClass: 'opacity-100',
   leaveToClass: 'opacity-0',
 }
+
+export const gridInjectionKey = Symbol()

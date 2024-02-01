@@ -20,9 +20,7 @@ export default defineNuxtConfig({
       compositionOnly: true,
     },
   },
-  devServer: {
-    port: 2309,
-  },
+  devServer: { port: 2309 },
   ssr: true,
   app: {
     head: {
@@ -45,17 +43,8 @@ export default defineNuxtConfig({
       ],
     },
   },
-  nitro: {
-    preset: 'github-pages',
-  },
-  components: [
-    {
-      path: '~/components',
-      pathPrefix: false,
-    },
-  ],
-  content: {
-    locales: ['en', 'zh'],
-    navigation: false,
-  },
+  nitro: { preset: 'github-pages' },
+  components: [{ path: '~/components', pathPrefix: false }],
+  content: { locales: ['en', 'zh'], navigation: false },
+  tailwindcss: { exposeConfig: true },
 })

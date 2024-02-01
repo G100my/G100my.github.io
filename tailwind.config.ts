@@ -107,6 +107,19 @@ export default {
           '950': '#363636',
         },
       },
+      width: Array(10)
+        .fill(null)
+        .reduce((acc, _i, i) => {
+          return { ...acc, [`g${i + 1}`]: 80 * (i + 1) + 'px' }
+        }, {}),
+      height: Array(10)
+        .fill(null)
+        .reduce((acc, _i, i) => {
+          return { ...acc, [`g${i + 1}`]: 80 * (i + 1) + 'px' }
+        }, {}),
+      borderRadius: {
+        inherit: 'inherit',
+      },
     },
   },
 } satisfies Config

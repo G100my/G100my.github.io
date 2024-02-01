@@ -24,6 +24,6 @@ A dessert cafe in Kaohsiung, Taiwan, showcasing basic business information and l
 
 ## Your Harbour Lover
 
-A personal website created for a close friend, purely for fun.
+A personal website created for my friend, purely for fun.
 
 - Integrated Google Apps Script to allow my friend to use Google Sheets as a backend for a recommended business list, enabling easy data updates.

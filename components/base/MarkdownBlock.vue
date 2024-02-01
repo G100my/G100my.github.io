@@ -7,23 +7,24 @@ defineProps<{
 }>()
 </script>
 <template>
-  <div>
-    <ContentQuery
-      :path="article"
-      :locale="$i18n.locale"
-      v-slot="{ data }"
-      find="one"
-    >
-      <template v-if="open">
-        <ContentRenderer
-          :value="data"
-          class="rounded-lg bg-white/80 p-4 text-xl"
-        />
-      </template>
-      <template v-else>
-        <div class="group flex h-40 cursor-pointer items-center justify-center">
-          <h3 class="text-5xl">{{ (data as ParsedContent).title }}</h3>
-          <!-- <div
+  <ContentQuery
+    :path="article"
+    :locale="$i18n.locale"
+    v-slot="{ data }"
+    find="one"
+  >
+    <template v-if="open">
+      <div class="h-full w-full rounded-lg p-4">
+        <ContentRenderer :value="data" class="_markdown text-md" />
+        <slot />
+      </div>
+    </template>
+    <template v-else>
+      <div
+        class="group flex h-24 cursor-pointer items-center justify-center p-6"
+      >
+        <h3 class="text-3xl">{{ (data as ParsedContent).title }}</h3>
+        <!-- <div
             v-if="(data as ParsedContent).excerpt"
             class="absolute bottom-0 right-0 flex justify-end overflow-hidden"
           >
@@ -35,8 +36,7 @@ defineProps<{
               ]"
             />
           </div> -->
-        </div>
-      </template>
-    </ContentQuery>
-  </div>
+      </div>
+    </template>
+  </ContentQuery>
 </template>
