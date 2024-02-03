@@ -26,4 +26,24 @@ p {
 body {
   @apply bg-black;
 }
+
+/* markdown */
+._markdown {
+  @apply flex flex-col gap-4 px-4 py-6 text-base lg:px-8 lg:py-10 lg:text-lg;
+}
+._markdown > ul {
+  @apply list-disc pl-5;
+}
+._markdown > ol {
+  @apply list-decimal pl-5;
+}
+._markdown p {
+  @apply leading-normal;
+}
+._markdown li {
+  @apply leading-snug;
+}
+._markdown a {
+  @apply text-seagull-800 underline underline-offset-2;
+}
 </style>

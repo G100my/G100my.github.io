@@ -15,13 +15,16 @@ defineProps<{
   >
     <template v-if="open">
       <div class="h-full w-full rounded-lg p-4">
+        <h2 class="g:whitespace-nowrap max-w-full text-3xl">
+          {{ (data as ParsedContent).title }}
+        </h2>
         <ContentRenderer :value="data" class="_markdown text-md" />
         <slot />
       </div>
     </template>
     <template v-else>
-      <div class="h-g1 flex flex-col items-center justify-center">
-        <h2 class="whitespace-nowrap text-3xl">
+      <div class="h-g1 flex max-w-full flex-col items-center justify-center">
+        <h2 class="g:whitespace-nowrap max-w-full text-3xl">
           {{ (data as ParsedContent).title }}
         </h2>
       </div>

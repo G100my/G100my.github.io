@@ -16,11 +16,37 @@ export default {
             display: 'none',
           },
         },
+        ...Array(10)
+          .fill(null)
+          .reduce((acc, _i, i) => {
+            return {
+              ...acc,
+              [`.w-g${i + 1}`]: {
+                width: 80 * (i + 1) + 'px',
+                '@media (max-width:500px)': {
+                  width: '100%',
+                },
+              },
+            }
+          }, {}),
+        ...Array(10)
+          .fill(null)
+          .reduce((acc, _i, i) => {
+            return {
+              ...acc,
+              [`.h-g${i + 1}`]: {
+                height: 80 * (i + 1) + 'px',
+              },
+            }
+          }, {}),
       })
     }),
   ],
   theme: {
     extend: {
+      screens: {
+        g: '500px',
+      },
       colors: {
         gold: {
           DEFAULT: '#ffd700',
@@ -107,16 +133,6 @@ export default {
           '950': '#363636',
         },
       },
-      width: Array(10)
-        .fill(null)
-        .reduce((acc, _i, i) => {
-          return { ...acc, [`g${i + 1}`]: 80 * (i + 1) + 'px' }
-        }, {}),
-      height: Array(10)
-        .fill(null)
-        .reduce((acc, _i, i) => {
-          return { ...acc, [`g${i + 1}`]: 80 * (i + 1) + 'px' }
-        }, {}),
       borderRadius: {
         inherit: 'inherit',
       },

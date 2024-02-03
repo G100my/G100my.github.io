@@ -8,7 +8,7 @@ export function copy2clipboard(v: string) {
 const colSteps = 12
 export function createMoveAnime(
   node: HTMLElement,
-  col: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
+  col: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 = 10,
 ): Anime.AnimeInstance {
   const margin = Anime.get(node, 'margin')
   const { left, width, height, top } = node.getBoundingClientRect()
@@ -29,7 +29,6 @@ export function createMoveAnime(
     loop: false,
     duration: 100,
     easing: 'linear',
-    zIndex: 10,
     loopComplete: (anime) => {
       anime.reverse()
     },
@@ -41,7 +40,7 @@ export function createMoveAnime(
     })
     .add({
       targets: node.parentNode,
-      zIndex: 10,
+      zIndex: [0, 10],
       outlineWidth: 0,
     })
     .add({

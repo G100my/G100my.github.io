@@ -7,16 +7,10 @@ defineOptions({
 })
 
 type GridItemSize = 'sm' | 'md' | undefined
-const props = withDefaults(
-  defineProps<{
-    size?: GridItemSize
-    unscalable?: boolean
-    col: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  }>(),
-  {
-    col: 10,
-  },
-)
+const props = defineProps<{
+  size?: GridItemSize
+  unscalable?: boolean
+}>()
 
 let moveAnime: Anime.AnimeInstance
 let bgAnime: Anime.AnimeInstance
@@ -33,8 +27,11 @@ const clickHandler = (event: MouseEvent) => {
 
   if (isScale.value) {
     isScale.value = !isScale.value
+    moveAnime.finished.then(() => {
+      container.value?.setAttribute('style', '')
+    })
   } else {
-    moveAnime = createMoveAnime(container.value!, props.col)
+    moveAnime = createMoveAnime(container.value!)
     moveAnime.finished.then(() => {
       isScale.value = !isScale.value
     })
@@ -46,10 +43,8 @@ const clickHandler = (event: MouseEvent) => {
 <template>
   <section
     :class="[
-      'absolute',
-      'outline outline-seagull-950',
+      'g:-translate-x-[600px] g:w-auto absolute w-full -translate-x-full outline outline-seagull-950 transition-transform',
       { 'cursor-pointer': !unscalable },
-      '-translate-x-[1000px] transition-transform',
     ]"
     @click="clickHandler"
     @mousedown="isDragging = false"
@@ -58,7 +53,7 @@ const clickHandler = (event: MouseEvent) => {
     <div
       data-name="grid_item_content"
       ref="container"
-      class="overflow-auto border-0 border-seagull-300 no-scrollbar"
+      class="h-full w-full overflow-auto border-0 border-seagull-300 no-scrollbar"
       v-bind="$attrs"
     >
       <slot v-bind="{ isScale }" />

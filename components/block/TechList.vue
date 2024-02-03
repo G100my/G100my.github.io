@@ -50,16 +50,16 @@ const list = [
       <img
         :src="i.icon"
         :alt="i.name"
-        class="_gradient h-5 w-5 sm:h-8 sm:w-8 lg:h-12 lg:w-12"
+        class="_gradient g:h-8 g:w-8 h-5 w-5 lg:h-12 lg:w-12"
         :title="i.name"
       />
-      <span class="whitespace-pre-line text-center text-xs sm:text-sm">{{
+      <span class="g:text-sm whitespace-pre-line text-center text-xs">{{
         i.name
       }}</span>
     </li>
   </ul>
 </template>
-<style>
+<style scoped>
 ._gradient {
   background: radial-gradient(theme('colors.seagull.200'), transparent 70%);
 }

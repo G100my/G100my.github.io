@@ -18,7 +18,7 @@ const top = [
     <div class="_bg absolute h-full w-full" />
     <main
       :class="[
-        '_container relative z-10 mx-auto h-screen min-h-screen snap-y snap-mandatory space-y-10 overflow-hidden overflow-y-auto p-10 text-white backdrop-blur-sm sm:no-scrollbar',
+        '_container g:no-scrollbar relative z-10 mx-auto h-screen min-h-screen snap-y snap-mandatory space-y-10 overflow-hidden overflow-y-auto p-10 text-white backdrop-blur-sm',
       ]"
     >
       <div class="relative z-10 space-y-10">
@@ -44,9 +44,9 @@ const top = [
         <Markdown article="about" />
       </section>
 
-      <section>
+      <section class="overflow-auto">
         <Markdown article="tech" />
-        <TechList />
+        <!-- <TechList /> -->
       </section>
 
       <section>

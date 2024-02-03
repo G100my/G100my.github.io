@@ -182,7 +182,7 @@ onMounted(() => {
     <p class="font-silkscreen text-xl">If I have 70 years</p>
   </div>
 </template>
-<style>
+<style scoped>
 #life_progressing {
   --lightColor: white;
 }
@@ -192,7 +192,7 @@ onMounted(() => {
   @apply grid h-screen w-full items-center justify-items-center gap-0.5 bg-slate-950 p-3;
 }
 .life_progressing_item {
-  @apply h-3 w-3 rounded-sm  bg-blue-950 sm:h-4 sm:w-4;
+  @apply g:h-4 g:w-4 h-3  w-3 rounded-sm bg-blue-950;
 }
 .life_progressing_item.current {
   @apply bg-white/50;

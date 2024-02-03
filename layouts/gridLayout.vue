@@ -8,9 +8,12 @@ onMounted(() => {
   grid.value = new $muuri('#grid_container', GRID_OPTIONS)
   // @ts-ignore
   window.grid = grid.value
-  const items = document
-    .getElementById('grid_container')!
-    .querySelectorAll('section')
+  const items = Array.from(
+    document.getElementById('grid_container')!.querySelectorAll('section'),
+  ).filter((i) => {
+    return window.getComputedStyle(i).display !== 'none'
+  })
+  console.log('🚀 ~ onMounted ~ items:', items)
 
   nextTick(() => {
     for (let i = 0; i < items.length; i++) {
@@ -42,9 +45,9 @@ function handleRelayout() {
   <div
     class="fixed inset-0 h-screen w-full bg-gradient-to-b from-lochmara-50/90 from-30% to-lochmara-800/80"
   />
-  <div class="mx-auto h-screen max-h-screen overflow-hidden p-10">
+  <div class="mx-auto h-screen max-h-screen overflow-auto p-10">
     <main id="grid_container" :class="['relative mx-auto max-w-7xl']">
-      <GridItem unscalable class="w-g4 h-g6 p-6">
+      <GridItem unscalable class="w-g4 h-g6 g:p-6 p-3">
         <h1 class="text-center text-5xl" @click="handleRelayout">
           <p>[ {{ MY_INFO.name }} ]</p>
         </h1>
@@ -71,10 +74,8 @@ function handleRelayout() {
         </MarkdownBlock>
       </GridItem>
 
-      <GridItem unscalable>
-        <div class="w-g4 h-g6">
-          <LifeProgressing />
-        </div>
+      <GridItem unscalable class="w-g4 h-g6">
+        <LifeProgressing class="h-full w-full" />
       </GridItem>
 
       <GridItem class="w-g4 h-g6 flex flex-col p-6" v-slot="{ isScale }">
@@ -100,11 +101,15 @@ function handleRelayout() {
         />
       </GridItem>
 
-      <GridItem v-for="i in 50" unscalable>
-        <div class="w-g1 h-g1"></div>
-      </GridItem>
+      <section
+        v-for="i in 50"
+        unscalable
+        class="g:block w-g1 h-g1 g:-translate-x-[600px] absolute hidden w-full -translate-x-full outline outline-seagull-950 transition-transform"
+      >
+        <div class="h-full w-full"></div>
+      </section>
 
-      <GridItem unscalable>
+      <GridItem unscalable class="flex items-center justify-center">
         <LangSwitch
           class="flex h-20 w-20 items-center justify-center !text-6xl"
         />
@@ -113,27 +118,7 @@ function handleRelayout() {
     <div id="mask" class="fixed inset-0 h-0" />
   </div>
 </template>
-<style>
-/* markdown */
-._markdown {
-  @apply flex flex-col gap-4 px-4 py-6 text-base lg:px-8 lg:py-10 lg:text-lg;
-}
-._markdown > ul {
-  @apply list-disc pl-5;
-}
-._markdown > ol {
-  @apply list-decimal pl-5;
-}
-._markdown p {
-  @apply leading-normal;
-}
-._markdown li {
-  @apply leading-snug;
-}
-._markdown a {
-  @apply text-seagull-800 underline underline-offset-2;
-}
-
+<style scoped>
 ._contact > h2 {
   @apply flex items-center text-center text-lg before:mr-4 after:ml-4;
 }
