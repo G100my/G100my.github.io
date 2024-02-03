@@ -42,6 +42,7 @@ export function createMoveAnime(
     .add({
       targets: node.parentNode,
       zIndex: 10,
+      outlineWidth: 0,
     })
     .add({
       targets: node,
@@ -76,4 +77,14 @@ export function createColorAnime(node: HTMLElement): Anime.AnimeInstance {
     opacity: 0.9,
     borderRadius: 28,
   })
+}
+
+export function timeFormatter(timestamp: string) {
+  const date = new Date(timestamp)
+  const y = date.getFullYear()
+  let m: string | number = date.getMonth() + 1
+  if (m < 10) m = '0' + m
+  let d: string | number = date.getDate()
+  if (d < 10) d = '0' + d
+  return `${y}/${m}/${d}`
 }

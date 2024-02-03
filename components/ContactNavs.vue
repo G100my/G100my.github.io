@@ -8,9 +8,9 @@ import { MY_INFO } from '~/constants'
       <span class="sr-only">Email</span>
     </a>
 
-    <a target="_blank" :href="MY_INFO.ig">
-      <IconWrapped name="instagram-line" />
-      <span class="sr-only">Instagram</span>
+    <a target="_blank" :href="MY_INFO.cakeResume">
+      <IconWrapped name="article-line" />
+      <span class="sr-only">Resume</span>
     </a>
 
     <a target="_blank" :href="MY_INFO.github">

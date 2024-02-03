@@ -7,6 +7,7 @@ export const GRID_OPTIONS: GridOptions = {
   layout: {
     fillGaps: true,
   },
+  items: undefined,
 }
 
 const gridStack = reactive<{ [key: string]: Grid }>({})

@@ -3,9 +3,10 @@ export const MY_INFO = computed(() => {
   return {
     name: t('me.name'),
     email: 'g100mylan229@gmail.com',
-    ig: 'https://www.instagram.com/lo_ol.g100/',
+    // ig: 'https://www.instagram.com/lo_ol.g100/',
     github: 'https://github.com/G100my',
     linkedin: 'https://www.linkedin.com/in/g100lo/',
+    cakeResume: 'https://www.cakeresume.com/s--hCYv4B1OJUn_Goo97IKMzA--/g100my',
     company: t('me.company_of_employment'),
     companyUrl: 'https://lubn.com/',
     title: t('me.title'),

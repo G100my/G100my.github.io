@@ -6,18 +6,46 @@ const { $muuri } = useNuxtApp()
 const grid = ref<Grid>()
 onMounted(() => {
   grid.value = new $muuri('#grid_container', GRID_OPTIONS)
+  // @ts-ignore
+  window.grid = grid.value
+  const items = document
+    .getElementById('grid_container')!
+    .querySelectorAll('section')
+
+  nextTick(() => {
+    for (let i = 0; i < items.length; i++) {
+      const e = items[i]
+      e.addEventListener(
+        'transitionend',
+        () => {
+          // remove GridItem static class: '-translate-x-[1000px]'
+          e.classList.remove('-translate-x-[1000px]', 'transition-transform')
+        },
+        { once: true },
+      )
+      setTimeout(() => {
+        grid.value?.add(e)
+      }, i * 60)
+    }
+  })
 })
 provide(gridInjectionKey, grid)
+
+function handleRelayout() {
+  // grid.value?.refreshSortData()
+  grid.value?.refreshItems()
+  grid.value?.layout()
+}
 </script>
 <template>
   <!-- <img src="~/assets/bg.png" class="fixed h-screen w-screen object-cover" /> -->
   <div
     class="fixed inset-0 h-screen w-full bg-gradient-to-b from-lochmara-50/90 from-30% to-lochmara-800/80"
   />
-  <div class="mx-auto p-10">
+  <div class="mx-auto h-screen max-h-screen overflow-hidden p-10">
     <main id="grid_container" :class="['relative mx-auto max-w-7xl']">
       <GridItem unscalable class="w-g4 h-g6 p-6">
-        <h1 class="text-center text-5xl">
+        <h1 class="text-center text-5xl" @click="handleRelayout">
           <p>[ {{ MY_INFO.name }} ]</p>
         </h1>
 
@@ -51,6 +79,9 @@ provide(gridInjectionKey, grid)
 
       <GridItem class="w-g4 h-g6 flex flex-col p-6" v-slot="{ isScale }">
         <h2 class="text-xl">{{ $t('todolist.title') }}</h2>
+        <p v-show="isScale" class="mb-3 text-center">
+          {{ $t('todolist.description') }}
+        </p>
         <Todolist class="h-full no-scrollbar" :class="{ 'flex-1': !isScale }" />
       </GridItem>
 
@@ -69,7 +100,7 @@ provide(gridInjectionKey, grid)
         />
       </GridItem>
 
-      <GridItem v-for="i in 27">
+      <GridItem v-for="i in 50" unscalable>
         <div class="w-g1 h-g1"></div>
       </GridItem>
 

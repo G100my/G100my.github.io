@@ -20,25 +20,16 @@ defineProps<{
       </div>
     </template>
     <template v-else>
-      <div
-        class="group flex h-20 cursor-pointer items-center justify-center p-6"
-      >
+      <div class="h-g1 flex flex-col items-center justify-center">
         <h2 class="whitespace-nowrap text-3xl">
           {{ (data as ParsedContent).title }}
         </h2>
-        <!-- <div
-            v-if="(data as ParsedContent).excerpt"
-            class="absolute bottom-0 right-0 flex justify-end overflow-hidden"
-          >
-            <ContentRendererMarkdown
-              :value="(data as ParsedContent).excerpt!"
-              :class="[
-                'markdown h-5/6 w-5/6 bg-white/80',
-                'translate-x-full translate-y-full transition-transform group-hover:translate-x-0 group-hover:translate-y-0',
-              ]"
-            />
-          </div> -->
       </div>
+      <ContentRendererMarkdown
+        v-if="(data as ParsedContent).excerpt"
+        :value="(data as ParsedContent).excerpt!"
+        class="h-g3 p-4 pt-0"
+      />
     </template>
   </ContentQuery>
 </template>
