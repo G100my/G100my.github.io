@@ -1,6 +1,17 @@
 <script setup lang="ts">
+import type { GridOptions } from 'muuri'
 import type Grid from 'muuri'
 import { MY_INFO, gridInjectionKey } from '~/constants'
+const { isMobile } = useDevice()
+
+const GRID_OPTIONS: GridOptions = {
+  layoutOnResize: true,
+  dragEnabled: !isMobile,
+  layout: {
+    fillGaps: true,
+  },
+  items: undefined,
+}
 
 const { $muuri } = useNuxtApp()
 const grid = ref<Grid>()
