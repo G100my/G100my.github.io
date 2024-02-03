@@ -12,5 +12,6 @@
   "spotify.title": "Coding 時聽什麼？",
   "my_music.title": "不覺得 Coding 就像在玩遊戲嗎？聽這種類型的音樂戰鬥力很高👍",
   "todolist.title": "100 件有生之年還想做的事",
-  "todolist.description": "你有看過 “殭屍100～在成為殭屍前要做的100件事～”嗎？"
+  "todolist.description": "你有看過 “殭屍100～在成為殭屍前要做的100件事～”嗎？",
+  "website.description": "這個網站用 Muuri 做了動態的響應式設計，你可以隨意改變視窗大小看看，沒什麼用但我就想做🤣，原本是打算做成電子名片的形式，但一直想不出好的設計，做著做著又覺得類似 Dashboard 的形式好像也不錯，簡潔、想放什麼就把他都變成一個個\"區塊\"，就變成這樣囉~"
 }

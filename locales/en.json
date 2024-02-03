@@ -12,5 +12,6 @@
   "spotify.title": "What I listen when coding...",
   "my_music.title": "Coding to me is just like playing video games, don't you think?",
   "todolist.title": "100 Todolist",
-  "todolist.description": "Have you read the manga 'Zom 100: Bucket List of the Dead'?"
+  "todolist.description": "Have you read the manga 'Zom 100: Bucket List of the Dead'?",
+  "website.description": "This website utilizes Muuri for dynamic responsive design. You can freely resize the window to see - it's not particularly useful, but I just wanted to do it 🤣. Initially, the plan was to create it in the form of a digital business card, but I couldn't come up with a good design. As I kept working on it, the idea of shaping it into a dashboard-like format seemed appealing too - simple, and whatever you want to add, just turn it into \"blocks\". And so, it turned out this way~"
 }

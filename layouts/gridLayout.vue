@@ -143,6 +143,12 @@ function handleRelayout() {
         <div class="h-full w-full"></div>
       </section>
 
+      <GridItem class="w-g3 h-g4">
+        <p class="p-4">
+          {{ $t('website.description') }}
+        </p>
+      </GridItem>
+
       <GridItem unscalable class="flex items-center justify-center">
         <LangSwitch
           class="flex h-20 w-20 items-center justify-center !text-6xl"
