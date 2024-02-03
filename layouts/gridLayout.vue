@@ -13,7 +13,6 @@ onMounted(() => {
   ).filter((i) => {
     return window.getComputedStyle(i).display !== 'none'
   })
-  console.log('🚀 ~ onMounted ~ items:', items)
 
   nextTick(() => {
     for (let i = 0; i < items.length; i++) {
@@ -21,8 +20,8 @@ onMounted(() => {
       e.addEventListener(
         'transitionend',
         () => {
-          // remove GridItem static class: '-translate-x-[1000px]'
-          e.classList.remove('-translate-x-[1000px]', 'transition-transform')
+          // remove GridItem static class: '-translate-x-[800px]'
+          e.classList.remove('-translate-x-[800px]', 'transition-transform')
         },
         { once: true },
       )
@@ -104,7 +103,7 @@ function handleRelayout() {
       <section
         v-for="i in 50"
         unscalable
-        class="g:block w-g1 h-g1 g:-translate-x-[600px] absolute hidden w-full -translate-x-full outline outline-seagull-950 transition-transform"
+        class="g:block w-g1 h-g1 absolute hidden w-full -translate-x-[800px] outline outline-seagull-950 transition-transform"
       >
         <div class="h-full w-full"></div>
       </section>

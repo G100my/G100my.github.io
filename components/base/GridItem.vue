@@ -43,7 +43,7 @@ const clickHandler = (event: MouseEvent) => {
 <template>
   <section
     :class="[
-      'g:-translate-x-[600px] g:w-auto absolute w-full -translate-x-full outline outline-seagull-950 transition-transform',
+      'g:w-auto absolute w-full -translate-x-[800px] outline outline-seagull-950 transition-transform',
       { 'cursor-pointer': !unscalable },
     ]"
     @click="clickHandler"
