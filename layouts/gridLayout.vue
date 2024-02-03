@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GridOptions } from 'muuri'
+import type { GridOptions, Item } from 'muuri'
 import type Grid from 'muuri'
 import { MY_INFO, gridInjectionKey } from '~/constants'
 const { isMobile } = useDevice()
@@ -21,13 +21,17 @@ onMounted(() => {
   window.grid = grid.value
   const items = Array.from(
     document.getElementById('grid_container')!.querySelectorAll('section'),
-  ).filter((i) => {
+  )
+  const realItems = items.filter((i) => {
     return window.getComputedStyle(i).display !== 'none'
+  })
+  let placeHolderItems: HTMLElement[] | Item[] = items.filter((i) => {
+    return window.getComputedStyle(i).display === 'none'
   })
 
   nextTick(() => {
-    for (let i = 0; i < items.length; i++) {
-      const e = items[i]
+    for (let i = 0; i < realItems.length; i++) {
+      const e = realItems[i]
       e.addEventListener(
         'transitionend',
         () => {
@@ -41,6 +45,27 @@ onMounted(() => {
       }, i * 60)
     }
   })
+  setTimeout(
+    () => {
+      placeHolderItems = grid.value?.add(placeHolderItems as HTMLElement[], {
+        index: -1,
+      })!
+    },
+    (realItems.length + 1) * 60,
+  )
+  const hidePlaceholder = () => {
+    if (window.innerWidth < 500) {
+      grid.value?.hide(placeHolderItems as Item[])
+      window.onresize = showPlaceholder
+    }
+  }
+  const showPlaceholder = () => {
+    if (window.innerWidth > 500) {
+      grid.value?.show(placeHolderItems as Item[])
+      window.onresize = hidePlaceholder
+    }
+  }
+  window.onresize = showPlaceholder
 })
 provide(gridInjectionKey, grid)
 
@@ -113,7 +138,6 @@ function handleRelayout() {
 
       <section
         v-for="i in 50"
-        unscalable
         class="g:block w-g1 h-g1 absolute hidden w-full -translate-x-[800px] outline outline-seagull-950 transition-transform"
       >
         <div class="h-full w-full"></div>
