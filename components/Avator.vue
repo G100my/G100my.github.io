@@ -95,5 +95,5 @@ onMounted(() => {
 })
 </script>
 <template>
-  <canvas id="canvas" class="aspect-square w-[310px] bg-transparent" />
+  <canvas id="canvas" class="w-g3 aspect-square bg-transparent" />
 </template>

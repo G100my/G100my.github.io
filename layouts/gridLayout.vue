@@ -14,10 +14,10 @@ provide(gridInjectionKey, grid)
   <div
     class="fixed inset-0 h-screen w-full bg-gradient-to-b from-lochmara-50/90 from-30% to-lochmara-800/80"
   />
-  <div class="container mx-auto p-10">
-    <main id="grid_container" :class="['relative']">
-      <GridItem unscalable class="p-3">
-        <h1 class="py-3 text-center text-5xl">
+  <div class="mx-auto p-10">
+    <main id="grid_container" :class="['relative mx-auto max-w-7xl']">
+      <GridItem unscalable class="w-g4 h-g6 p-6">
+        <h1 class="text-center text-5xl">
           <p>[ {{ MY_INFO.name }} ]</p>
         </h1>
 
@@ -27,44 +27,55 @@ provide(gridInjectionKey, grid)
 
         <div class="_contact">
           <h2>Contacts</h2>
-          <ContactNavs class="mb-3 flex items-center justify-around gap-4" />
+          <ContactNavs class="flex items-center justify-around gap-4" />
         </div>
       </GridItem>
 
-      <GridItem v-slot="{ isScale }">
+      <GridItem v-slot="{ isScale }" class="w-g3">
         <MarkdownBlock article="about" :open="isScale" />
-        <!-- <MarkdownAccordion v-else article="about" /> -->
       </GridItem>
-      <GridItem v-slot="{ isScale }">
+      <GridItem v-slot="{ isScale }" class="w-g4">
         <MarkdownBlock article="projects" :open="isScale" />
       </GridItem>
-      <GridItem v-slot="{ isScale }">
+      <GridItem v-slot="{ isScale }" class="w-g5">
         <MarkdownBlock article="tech" :open="isScale">
           <TechList />
         </MarkdownBlock>
       </GridItem>
+
       <GridItem unscalable>
         <div class="w-g4 h-g6">
           <LifeProgressing />
         </div>
       </GridItem>
-      <GridItem>
-        <div
-          class="flex h-[500px] w-full items-center justify-center bg-black text-white"
-        >
-          spotify
-        </div>
+
+      <GridItem class="w-g4 h-g6 flex flex-col p-6" v-slot="{ isScale }">
+        <h2 class="text-xl">{{ $t('todolist.title') }}</h2>
+        <Todolist class="h-full no-scrollbar" :class="{ 'flex-1': !isScale }" />
       </GridItem>
-      <GridItem class="py-4 lg:py-0" v-slot="{ isScale }">
-        <Todolist
-          class="h-full px-4 py-2 no-scrollbar"
-          :class="{ 'max-h-96 max-w-sm': !isScale }"
+
+      <GridItem unscalable class="w-g4 h-g4 flex flex-col">
+        <h2 class="px-2 pt-6 text-lg">{{ $t('my_music.title') }}</h2>
+        <iframe
+          style="border-radius: 12px"
+          class="my-auto opacity-80"
+          src="https://open.spotify.com/embed/playlist/67qPP56zAaGoHYzbTzEyfC?utm_source=generator&theme=0"
+          width="100%"
+          height="152"
+          frameBorder="0"
+          allowfullscreen
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
         />
+      </GridItem>
+
+      <GridItem v-for="i in 27">
+        <div class="w-g1 h-g1"></div>
       </GridItem>
 
       <GridItem unscalable>
         <LangSwitch
-          class="flex h-24 w-24 items-center justify-center !text-6xl"
+          class="flex h-20 w-20 items-center justify-center !text-6xl"
         />
       </GridItem>
     </main>
@@ -79,14 +90,21 @@ provide(gridInjectionKey, grid)
 ._markdown > ul {
   @apply list-disc pl-5;
 }
+._markdown > ol {
+  @apply list-decimal pl-5;
+}
 ._markdown p {
   @apply leading-normal;
 }
 ._markdown li {
   @apply leading-snug;
 }
+._markdown a {
+  @apply text-seagull-800 underline underline-offset-2;
+}
+
 ._contact > h2 {
-  @apply my-1 flex items-center text-center text-lg before:mr-4 after:ml-4;
+  @apply flex items-center text-center text-lg before:mr-4 after:ml-4;
 }
 ._contact > h2::before,
 ._contact > h2::after {

@@ -45,6 +45,10 @@ export default defineNuxtConfig({
   },
   nitro: { preset: 'github-pages' },
   components: [{ path: '~/components', pathPrefix: false }],
-  content: { locales: ['en', 'zh'], navigation: false },
+  content: {
+    locales: ['en', 'zh'],
+    navigation: false,
+    markdown: { anchorLinks: false },
+  },
   tailwindcss: { exposeConfig: true },
 })

@@ -175,9 +175,11 @@ onMounted(() => {
   <div
     class="absolute inset-0 m-auto flex h-fit w-full flex-col items-center justify-center rounded-xl bg-alto-400/30 p-6 font-black"
   >
-    <p class="text-6xl">{{ ((nowIndex / (70 * 12)) * 100).toFixed(2) }}%</p>
+    <p class="font-silkscreen text-6xl">
+      {{ ((nowIndex / (70 * 12)) * 100).toFixed(2) }}%
+    </p>
     <hr class="h-2 w-full bg-current" />
-    <p class="text-3xl">If I have 70 years</p>
+    <p class="font-silkscreen text-xl">If I have 70 years</p>
   </div>
 </template>
 <style>

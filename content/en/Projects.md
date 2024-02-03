@@ -2,7 +2,7 @@
 title: Side projects
 ---
 
-## Space Radio (Jukebox)
+### Space Radio (Jukebox)
 
 As development was nearing completion, Spotify introduced a similar feature that allowed collaborative playlist editing, so I discontinued further development/maintenance.
 
@@ -15,14 +15,14 @@ Space Radio was a platform for requesting background music based on the Spotify 
 1. Volume control.
 1. User activity logging.
 
-## Akijo 萩条集結所 portaly & Instagram Filter
+### Akijo 萩条集結所 portaly & Instagram Filter
 
 A dessert cafe in Kaohsiung, Taiwan, showcasing basic business information and links.
 
 - Integrated Google Analytics and utilized Firebase Cloud Messaging for web push notifications.
 - Created 3D models from 2D images using Blender and imported them into Meta Spark AR to create filters.
 
-## Your Harbour Lover
+### Your Harbour Lover
 
 A personal website created for my friend, purely for fun.
 

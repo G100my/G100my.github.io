@@ -8,5 +8,8 @@
   "100.title": "100 件還想去做的事情",
   "me.location": "高雄",
   "about.based_in": "常出沒在 {location}",
-  "about.employed_at": "任職於 {公司}"
+  "about.employed_at": "任職於 {公司}",
+  "spotify.title": "Coding 時聽什麼？",
+  "my_music.title": "不覺得 Coding 就像在玩遊戲嗎？聽這種類型的音樂戰鬥力很高👍",
+  "todolist.title": "有生之年還想..."
 }

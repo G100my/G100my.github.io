@@ -21,9 +21,11 @@ defineProps<{
     </template>
     <template v-else>
       <div
-        class="group flex h-24 cursor-pointer items-center justify-center p-6"
+        class="group flex h-20 cursor-pointer items-center justify-center p-6"
       >
-        <h3 class="text-3xl">{{ (data as ParsedContent).title }}</h3>
+        <h2 class="whitespace-nowrap text-3xl">
+          {{ (data as ParsedContent).title }}
+        </h2>
         <!-- <div
             v-if="(data as ParsedContent).excerpt"
             class="absolute bottom-0 right-0 flex justify-end overflow-hidden"

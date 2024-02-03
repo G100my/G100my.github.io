@@ -2,7 +2,7 @@
 import { MY_INFO } from '~/constants'
 </script>
 <template>
-  <nav class="p-1">
+  <nav>
     <a :href="'mailto:' + MY_INFO.email">
       <IconWrapped name="mail-line" />
       <span class="sr-only">Email</span>

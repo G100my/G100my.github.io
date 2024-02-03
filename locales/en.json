@@ -8,5 +8,8 @@
   "me.location": "Kaohsiung, Taiwan",
   "me.name": "Lo",
   "me.skills": "Front-end Web Development / Static Website Setup",
-  "me.title": "Front-end Web Developer"
+  "me.title": "Front-end Web Developer",
+  "spotify.title": "What I listen when coding...",
+  "my_music.title": "Coding to me is just like playing video games, don't you think?",
+  "todolist.title": "Todolist"
 }

@@ -45,7 +45,7 @@ const clickHandler = (event: MouseEvent) => {
 </script>
 <template>
   <section
-    :class="['absolute', 'border border-lochmara-600']"
+    :class="['absolute', 'outline outline-seagull-950']"
     @click="clickHandler"
     @mousedown="isDragging = false"
     @mousemove="isDragging = true"

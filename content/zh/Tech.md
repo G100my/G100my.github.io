@@ -1,5 +1,5 @@
 ---
-title: 工作技能
+title: Skill & experience
 ---
 
 目前工作上的技能主要專注在 **網頁前端**，經常以 Vue, TypeScript, Tailwind css 這樣的組合實作自己、工作上的專案。

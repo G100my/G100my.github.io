@@ -120,6 +120,9 @@ export default {
       borderRadius: {
         inherit: 'inherit',
       },
+      fontFamily: {
+        silkscreen: 'Silkscreen',
+      },
     },
   },
 } satisfies Config
