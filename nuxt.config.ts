@@ -24,6 +24,7 @@ export default defineNuxtConfig({
   ssr: true,
   app: {
     head: {
+      title: 'Lo - Profile Playground',
       link: [
         {
           rel: 'stylesheet',
