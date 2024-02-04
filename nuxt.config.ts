@@ -41,6 +41,17 @@ export default defineNuxtConfig({
           : {
               src: '//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-65073.js',
             },
+        // Google tag (gtag.js)
+        isProd && {
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-HPQ1FNRQFH',
+          async: true,
+        },
+        isProd && {
+          innerHTML: `window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-HPQ1FNRQFH');`,
+        },
       ],
     },
   },
