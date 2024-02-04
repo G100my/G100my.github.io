@@ -136,18 +136,18 @@ function handleRelayout() {
         />
       </GridItem>
 
-      <section
-        v-for="i in 50"
-        class="g:block w-g1 h-g1 absolute hidden w-full -translate-x-[800px] outline outline-seagull-950 transition-transform"
-      >
-        <div class="h-full w-full"></div>
-      </section>
-
       <GridItem class="w-g3 h-g4">
         <p class="p-4">
           {{ $t('website.description') }}
         </p>
       </GridItem>
+
+      <section
+        v-for="i in 38"
+        class="g:block w-g1 h-g1 absolute hidden w-full -translate-x-[800px] outline outline-seagull-950 transition-transform"
+      >
+        <div class="h-full w-full"></div>
+      </section>
 
       <GridItem unscalable class="flex items-center justify-center">
         <LangSwitch
