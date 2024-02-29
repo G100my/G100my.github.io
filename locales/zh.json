@@ -13,5 +13,13 @@
   "my_music.title": "不覺得 Coding 就像在玩遊戲嗎？聽這種類型的音樂戰鬥力很高👍",
   "todolist.title": "100 件有生之年還想做的事",
   "todolist.description": "你有看過 “殭屍100～在成為殭屍前要做的100件事～”嗎？",
-  "website.description": "這個網站用 Muuri 做了動態的響應式設計，你可以隨意改變視窗大小看看，沒什麼用但我就想做🤣，原本是打算做成電子名片的形式，但一直想不出好的設計，做著做著又覺得類似 Dashboard 的形式好像也不錯，簡潔、想放什麼就把他都變成一個個\"區塊\"，就變成這樣囉~"
+  "website.description": "這個網站用 Muuri 做了動態的響應式設計，你可以隨意改變視窗大小看看，沒什麼用但我就想做🤣，原本是打算做成電子名片的形式，但一直想不出好的設計，做著做著又覺得類似 Dashboard 的形式好像也不錯，簡潔、想放什麼就把他都變成一個個\"區塊\"，就變成這樣囉~",
+  "mail_to_me.title": "寫信給羅",
+  "contact_to_me.name": "怎麼稱呼？",
+  "contact_to_me.for_what": "怎麼了？",
+  "contact_to_me.option_interesting": "有個有趣的想法想找人一起完成（Side project、好玩的、公益的？）",
+  "contact_to_me.option_working": "工作的事情（例如：想做個網站但不知道怎麼開始？、已經有明確的想法了但沒有資源？）",
+  "contact_to_me.option_consulting": "諮詢任何事情（例如：想轉換跑道成為工程師但不知道怎麼開始？）",
+  "contact_to_me.option_others": "其他（例如...閒聊？）",
+  "contact_to_me.message": "描述一下是什麼事情？"
 }

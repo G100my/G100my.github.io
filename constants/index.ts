@@ -24,3 +24,10 @@ export const TransitionAttrs = {
 }
 
 export const gridInjectionKey = Symbol()
+
+export enum ContactToMeOptions {
+  Interesting,
+  Working,
+  Consulting,
+  Others,
+}

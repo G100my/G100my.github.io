@@ -82,7 +82,7 @@ function handleRelayout() {
   />
   <div class="mx-auto h-screen max-h-screen overflow-auto p-10">
     <main id="grid_container" :class="['relative mx-auto max-w-7xl']">
-      <GridItem unscalable class="w-g4 h-g6 g:p-6 p-3">
+      <GridItem unscalable class="p-3 w-g4 h-g6 g:p-6">
         <h1 class="text-center text-5xl" @click="handleRelayout">
           <p>[ {{ MY_INFO.name }} ]</p>
         </h1>
@@ -113,7 +113,7 @@ function handleRelayout() {
         <LifeProgressing class="h-full w-full" />
       </GridItem>
 
-      <GridItem class="w-g4 h-g6 flex flex-col p-6" v-slot="{ isScale }">
+      <GridItem class="flex flex-col p-6 w-g4 h-g6" v-slot="{ isScale }">
         <h2 class="text-xl">{{ $t('todolist.title') }}</h2>
         <p v-show="isScale" class="mb-3 text-center">
           {{ $t('todolist.description') }}
@@ -121,7 +121,7 @@ function handleRelayout() {
         <Todolist class="h-full no-scrollbar" :class="{ 'flex-1': !isScale }" />
       </GridItem>
 
-      <GridItem unscalable class="w-g4 h-g4 flex flex-col">
+      <GridItem unscalable class="flex flex-col w-g4 h-g4">
         <h2 class="px-2 pt-6 text-lg">{{ $t('my_music.title') }}</h2>
         <iframe
           style="border-radius: 12px"
@@ -144,10 +144,14 @@ function handleRelayout() {
 
       <section
         v-for="i in 38"
-        class="g:block w-g1 h-g1 absolute hidden w-full -translate-x-[800px] outline outline-seagull-950 transition-transform"
+        class="absolute hidden w-full -translate-x-[800px] outline outline-seagull-950 transition-transform w-g1 h-g1 g:block"
       >
         <div class="h-full w-full"></div>
       </section>
+
+      <GridItem>
+        <!--  -->
+      </GridItem>
 
       <GridItem unscalable class="flex items-center justify-center">
         <LangSwitch

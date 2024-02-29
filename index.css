@@ -1,0 +1,94 @@
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* common */
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Silkscreen;
+    @apply my-4 text-center font-bold;
+  }
+
+  p {
+    font-family: jf-jinxuanlatte;
+  }
+}
+
+@layer base {
+  input[type='radio'] {
+    @apply m-2.5 inline-block h-6 w-6 cursor-pointer appearance-none rounded-xl border border-gray-300 shadow outline-none;
+    /* box-shadow:
+      theme('colors.seagull.400' / 15%) 0 1px 1px,
+      inset theme('colors.seagull.600' / 70%) 0 0 0 1px; */
+    background-image: radial-gradient(
+      theme('colors.seagull.50') 0%,
+      theme('colors.seagull.300') 12%,
+      theme('colors.seagull.500' / 80%) 30%,
+      theme('colors.seagull.200' / 5%) 70%
+    );
+    background-repeat: no-repeat;
+    transition:
+      background-position 0.15s cubic-bezier(0.8, 0, 1, 1),
+      transform 0.25s cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  input[type='radio']:checked {
+    transition:
+      background-position 0.2s 0.15s cubic-bezier(0, 0, 0.2, 1),
+      transform 0.25s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  input[type='radio']:active {
+    transform: scale(1.5);
+    transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  /* The up/down direction logic */
+
+  input[type='radio'],
+  input[type='radio']:active {
+    background-position: 0 24px;
+  }
+
+  input[type='radio']:checked {
+    background-position: 0 0;
+  }
+
+  input[type='radio']:checked ~ input[type='radio'],
+  input[type='radio']:checked ~ input[type='radio']:active {
+    background-position: 0 -24px;
+  }
+}
+
+/* body {
+  @apply bg-black;
+} */
+
+/* markdown */
+._markdown {
+  @apply flex flex-col gap-4 px-4 py-6 text-base lg:px-8 lg:py-10 lg:text-lg;
+}
+._markdown > ul {
+  @apply list-disc pl-5;
+}
+._markdown > ol {
+  @apply list-decimal pl-5;
+}
+._markdown p {
+  @apply leading-normal;
+}
+._markdown li {
+  @apply leading-snug;
+}
+._markdown a {
+  @apply text-seagull-800 underline underline-offset-2;
+}

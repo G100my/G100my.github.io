@@ -2,7 +2,7 @@
 import { MY_INFO } from '~/constants'
 </script>
 <template>
-  <nav>
+  <nav id="Contact_nav">
     <a :href="'mailto:' + MY_INFO.email">
       <IconWrapped name="mail-line" />
       <span class="sr-only">Email</span>
@@ -24,12 +24,12 @@ import { MY_INFO } from '~/constants'
     </a>
   </nav>
 </template>
-<style scoped>
-nav > a {
+<style>
+#Contact_nav > a {
   @apply flex aspect-square items-center justify-center;
   @apply rounded-lg p-3 text-3xl shadow-lg;
 }
-nav > a > i {
+#Contact_nav > a > i {
   @apply flex aspect-square items-center justify-center leading-none;
 }
 </style>
