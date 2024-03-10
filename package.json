@@ -1,12 +1,12 @@
 {
-  "name": "nuxt-app",
+  "name": "me",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "devDependencies": {
     "@types/animejs": "^3.1.12",
@@ -16,6 +16,9 @@
     "prettier-plugin-tailwindcss": "^0.5.3"
   },
   "dependencies": {
+    "@astrojs/check": "^0.5.6",
+    "astro": "^4.4.15",
+    "typescript": "^5.4.2",
     "animejs": "^3.2.2",
     "muuri": "^0.9.5",
     "three": "^0.159.0"
